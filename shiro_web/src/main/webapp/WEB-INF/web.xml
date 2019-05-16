@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>mvc</display-name>
+
+    <!--
+    ①web.xml中组件加载顺序与其在web.xml中的先后顺序无关
+    ②context-param>listener>filter>servlet
+    -->
+
+    <!-- 先从/WEB-INF/下寻找配置文件shiro.ini，如果没有再找classpath:shiro.ini -->
+    <context-param>
+        <param-name>shiroEnvironmentClass</param-name>
+        <param-value>org.apache.shiro.web.env.IniWebEnvironment</param-value>
+    </context-param>
+    <context-param>
+        <param-name>shiroConfigLocations</param-name>
+        <param-value>classpath:shiro.ini</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--************************************************************分割线************************************************************-->
+
+    <!-- Session超时时间（单位：分钟） -->
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
+
+</web-app>
