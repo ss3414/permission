@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("")
 public class IndexController {
 
-    /* 欢迎页 */
     @RequestMapping("/")
     public ModelAndView index() {
         ModelAndView view = new ModelAndView("/index");
