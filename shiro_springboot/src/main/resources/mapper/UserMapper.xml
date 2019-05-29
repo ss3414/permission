@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mapper.UserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.model.ShiroUser">
+    <resultMap id="BaseResultMap" type="com.demo.model.User">
         <id column="id" property="id"/>
         <result column="user_name" property="userName"/>
         <result column="user_password" property="userPassword"/>
@@ -14,7 +14,7 @@
         id, user_name, user_password
     </sql>
 
-    <select id="selectUser" resultMap="BaseResultMap" parameterType="com.demo.model.ShiroUser">
+    <select id="selectUser" resultMap="BaseResultMap" parameterType="com.demo.model.User">
         select
         <include refid="Base_Column_List"/>
         from shiro_user

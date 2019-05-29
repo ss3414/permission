@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mapper.UserRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.model.ShiroUserRole">
+    <resultMap id="BaseResultMap" type="com.demo.model.UserRole">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="role_id" property="roleId"/>

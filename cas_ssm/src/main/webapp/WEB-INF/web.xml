@@ -58,7 +58,7 @@
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
 
-    <!-- 访问此页面如果没有登录会自动跳转到CAS服务端单点认证 -->
+    <!-- 访问此页面如果没有登录会自动跳转到CAS服务端登录 -->
     <filter>
         <filter-name>CAS Authentication Filter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
@@ -68,12 +68,7 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>
-                <!-- 开发环境 -->
-                <!--                http://127.0.0.1:8080-->
-                <!-- 生产环境（同域/跨域） -->
-                http://client1.test.com
-            </param-value>
+            <param-value>http://127.0.0.1:8080</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -81,7 +76,7 @@
         <url-pattern>/login1.jsp</url-pattern>
     </filter-mapping>
 
-    <!-- 允许此页面跳转到CAS服务端单点认证 -->
+    <!-- 允许此页面跳转到CAS服务端登录 -->
     <filter>
         <filter-name>CAS Validation Filter</filter-name>
         <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
@@ -91,10 +86,7 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>
-                <!--                http://127.0.0.1:8080-->
-                http://client1.test.com
-            </param-value>
+            <param-value>http://127.0.0.1:8080</param-value>
         </init-param>
         <init-param>
             <param-name>redirectAfterValidation</param-name>
@@ -110,7 +102,7 @@
         <url-pattern>/login1.jsp</url-pattern>
     </filter-mapping>
 
-    <!-- 单点认证成功后，允许此页面从request中获取用户信息 -->
+    <!-- 登录成功后，允许此页面从request中获取用户信息 -->
     <filter>
         <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
         <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>

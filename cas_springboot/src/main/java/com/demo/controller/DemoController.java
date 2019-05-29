@@ -14,6 +14,7 @@ public class DemoController {
     @RequestMapping("/login1")
     public ModelAndView login1(HttpServletRequest request) {
         ModelAndView view = new ModelAndView("/login");
+
         System.out.println(request.getRemoteUser());
         System.out.println(request.getUserPrincipal());
 

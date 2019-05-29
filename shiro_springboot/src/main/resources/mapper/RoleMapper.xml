@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mapper.RoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.model.ShiroRole">
+    <resultMap id="BaseResultMap" type="com.demo.model.Role">
         <id column="id" property="id"/>
         <result column="role_name" property="roleName"/>
     </resultMap>
@@ -13,7 +13,7 @@
         id, role_name
     </sql>
 
-    <select id="selectRoleList" resultMap="BaseResultMap" parameterType="com.demo.model.ShiroRole">
+    <select id="selectRoleList" resultMap="BaseResultMap" parameterType="com.demo.model.Role">
         SELECT role.
         <include refid="Base_Column_List"/>
         FROM shiro_user user, shiro_user_role userRole, shiro_role role

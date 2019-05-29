@@ -66,6 +66,7 @@ public class MyInterceptor implements HandlerInterceptor {
                     List<Permission> permissionList = permissionMapper.selectPermissionList(user);
                     for (Permission permission : permissionList) {
                         if (permission.getPermissionName().equals(request.getRequestURI())) {
+                            request.getSession().setAttribute("sessionUser", user);
                             return true;
                         }
                     }

@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mapper.PermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.model.ShiroPermission">
+    <resultMap id="BaseResultMap" type="com.demo.model.Permission">
         <id column="id" property="id"/>
         <result column="permission_status" property="permissionStatus"/>
         <result column="permission_name" property="permissionName"/>
@@ -19,7 +19,7 @@
     三表关联，输入User，输出其拥有的权限
     GROUP BY确保最终获取的值不重复
     -->
-    <select id="selectPermissionList" resultMap="BaseResultMap" parameterType="com.demo.model.ShiroUser">
+    <select id="selectPermissionList" resultMap="BaseResultMap" parameterType="com.demo.model.User">
         SELECT permission.
         <include refid="Base_Column_List"/>
         FROM shiro_user user, shiro_user_role userRole, shiro_role role, shiro_role_permission rolePermission, shiro_permission permission

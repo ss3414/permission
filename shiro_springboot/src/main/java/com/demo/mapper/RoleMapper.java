@@ -1,15 +1,15 @@
 package com.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.demo.model.ShiroRole;
-import com.demo.model.ShiroUser;
+import com.demo.model.Role;
+import com.demo.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface RoleMapper extends BaseMapper<ShiroRole> {
+public interface RoleMapper extends BaseMapper<Role> {
 
-    List<ShiroRole> selectRoleList(ShiroUser user);
+    List<Role> selectRoleList(User user);
 
 }

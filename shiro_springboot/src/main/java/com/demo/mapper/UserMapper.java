@@ -1,13 +1,13 @@
 package com.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.demo.model.ShiroUser;
+import com.demo.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserMapper extends BaseMapper<ShiroUser> {
+public interface UserMapper extends BaseMapper<User> {
 
     /* 查询是否存在此用户 */
-    ShiroUser selectUser(ShiroUser user);
+    User selectUser(User user);
 
 }

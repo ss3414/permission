@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mapper.FilterMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.model.ShiroFilter">
+    <resultMap id="BaseResultMap" type="com.demo.model.Filter">
         <id column="id" property="id"/>
         <result column="filter_sort" property="filterSort"/>
         <result column="filter_url" property="filterUrl"/>

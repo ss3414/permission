@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,9 @@ public class BackController {
      * ①登录成功跳转后台
      * */
     @RequestMapping("/home")
-    public ModelAndView home() {
+    public ModelAndView home(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user"); /* 登录成功时写入Session中的User */
+        User user2 = (User) request.getSession().getAttribute("sessionUser"); /* Interceptor写入的User */
         return new ModelAndView("/back/home");
     }
 

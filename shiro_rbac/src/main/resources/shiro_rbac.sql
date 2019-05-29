@@ -65,7 +65,7 @@ INSERT INTO `shiro_role_permission` VALUES (5, 2, 1);
 /************************************************************半分割线******************************/
 /* shiro_ssm数据库内容 */
 
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (1, 'user1', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (1, 'user1', 'e10adc3949ba59abbe56e057f20f883e'); /* 密码123456 */
 INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (2, 'user2', 'e10adc3949ba59abbe56e057f20f883e');
 INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (3, 'user3', 'e10adc3949ba59abbe56e057f20f883e');
 

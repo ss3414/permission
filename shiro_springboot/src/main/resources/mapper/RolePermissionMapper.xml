@@ -3,7 +3,7 @@
 <mapper namespace="com.demo.mapper.RolePermissionMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.demo.model.ShiroRolePermission">
+    <resultMap id="BaseResultMap" type="com.demo.model.RolePermission">
         <id column="id" property="id"/>
         <result column="role_id" property="roleId"/>
         <result column="permission_id" property="permissionId"/>
