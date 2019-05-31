@@ -23,13 +23,12 @@
     <tr>
         <td><a href="/back/permission2">权限2</a></td>
     </tr>
-    <%-- 可获取登录成功时写入的attr，获取不到Interceptor写入的attr --%>
     <tr>
         <td>${user.id}</td>
     </tr>
-    <%--    <tr>--%>
-    <%--        <td>${sessionUser.name}</td>--%>
-    <%--    </tr>--%>
+    <tr>
+        <td>${sessionUser.userName}</td>
+    </tr>
 </table>
 
 </body>

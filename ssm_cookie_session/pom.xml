@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com</groupId>
-    <artifactId>ssm_session_cookie</artifactId>
+    <artifactId>ssm_cookie_session</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -101,7 +101,7 @@
     </dependencies>
 
     <build>
-        <finalName>ssm_session_cookie</finalName>
+        <finalName>ssm_cookie_session</finalName>
         <plugins>
             <!-- mybatis generator （Maven的约定为resources而非resource）-->
             <plugin>

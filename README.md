@@ -3,6 +3,12 @@
 
 ************************************************************************************************************************
 
+# ssm_cookie_session
+①SSM（JDK6）+RBAC<br>
+②Session+拦截器控制权限<br>
+
+************************************************************************************************************************
+
 # shiro_ini
 ①Shiro（JDK6）<br>
 ②Shiro INI示例<br>
@@ -16,7 +22,6 @@
 ①Java EE（JDK6）+Shiro<br>
 ②将Shiro整合进原生Java Web项目中<br>
 数据库结构/Realm同shiro_rbac<br>
-
 ③技术细节<br>
 Main/Test项目是一次性的，Web项目是持续的<br>
 通过web.xml中的配置，Shiro被整合进Java Web项目中<br>
@@ -26,7 +31,6 @@ Shiro单独配置shiro.ini决定每个路由所需要的权限<br>
 ①SSM（JDK6）+Shiro<br>
 ②Shiro整合SSM<br>
 数据库结构同shiro_rbac，Realm调用MyBatis<br>
-
 ③技术细节<br>
 Java Web先整合SSM，再整合Shiro<br>
 权限可以由INI/XML/注解/Java代码决定<br>
@@ -37,20 +41,13 @@ MD5加密<br>
 不同用户不同权限，内容不同<br>
 
 # shiro_springboot
-①SB2（JDK8）+MBP+Shiro<br>
+①SpringBoot（JDK8）+MBP+Shiro<br>
 ②Shiro整合SpringBoot（shiro_ssm的SpringBoot版）<br>
 MyBatis配置（DataSourceConfig）<br>
 Shiro配置（ShiroConfig）<br>
-
 ③动态权限<br>
 动态过滤链实现动态权限<br>
 每次新增权限自动附加到管理员角色上<br>
-
-******************************************************************************************
-
-# ssm_session_cookie
-①SSM（JDK6）+RBAC<br>
-②Session+拦截器控制权限<br>
 
 ************************************************************************************************************************
 
@@ -68,7 +65,6 @@ CAS服务端：127.0.0.1 cas.test.com<br>
 # cas_ssm
 ①SSM（JDK8）+CAS<br>
 ②CAS客户端<br>
-
 ③web.xml配置<br>
 允许login1.jsp访问单点地址（CAS Validation Filter）<br>
 如果未登录访问login1.jsp会自动单点认证（CAS Authentication Filter）<br>
@@ -78,19 +74,13 @@ CAS服务端：127.0.0.1 cas.test.com<br>
 JSP直接放到webapp目录下，跳转时以.jsp结尾为传统Java EE写法<br>
 
 # cas_springboot
-①SB2（JDK8）+CAS<br>
+①SpringBoot（JDK8）+CAS<br>
 ②CAS客户端<br>
-
-③SpringBoot war<br>
-pom.xml中<packaging>war</packaging>+spring-boot-starter-tomcat改为provided<br>
-Application extends SpringBootServletInitializer implements WebApplicationInitializer<br>
-开发依旧使用Application启动，生产使用Maven package打war包<br>
-④CAS配置<br>
+③CAS配置<br>
 第三方Springboot CAS客户端（也可以将cas_ssm中的web.xml移植到cas_springboot中）<br>
 application.properties（对应web.xml配置）<br>
 Application @EnableCasClient（Springboot自动配置）<br>
-
-⑤跨域单点登录<br>
+④跨域单点登录<br>
 CAS单点登录的核心是：当cas_ssm登录过后，浏览器会保存CAS服务器的Cookie CASTGC，<br>
 当cas_springboot访问CAS服务器时会带上这个Cookie（这个Cookie cas_ssm/cas_springboot获取不到）<br>
 （除非CAS服务器将Cookie CASTGC跨域写入，否则无法跨域单点登录）<br>
