@@ -40,12 +40,6 @@
 
     <build>
         <finalName>shiro_rbac</finalName>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 
 </project>

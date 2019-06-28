@@ -1,11 +1,11 @@
 package com.common.shiro;
 
-import com.demo.mapper.PermissionMapper;
-import com.demo.mapper.RoleMapper;
-import com.demo.mapper.UserMapper;
-import com.demo.model.Permission;
-import com.demo.model.Role;
-import com.demo.model.User;
+import com.module.demo.mapper.PermissionMapper;
+import com.module.demo.mapper.RoleMapper;
+import com.module.demo.mapper.UserMapper;
+import com.module.demo.model.Permission;
+import com.module.demo.model.Role;
+import com.module.demo.model.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -28,6 +28,7 @@ public class RBACRealm extends AuthorizingRealm {
     @Autowired
     private PermissionMapper permissionMapper;
 
+    /* 登录 */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
@@ -44,6 +45,7 @@ public class RBACRealm extends AuthorizingRealm {
         return new SimpleAuthenticationInfo(result, result.getUserPassword(), getName());
     }
 
+    /* 授权 */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         User select = (User) principalCollection.getPrimaryPrincipal();

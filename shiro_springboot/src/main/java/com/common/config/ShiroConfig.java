@@ -50,7 +50,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager());
         /* 登录/登录成功/未授权URL */
         shiroFilterFactoryBean.setLoginUrl("/login/login");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login/noRolePermission"); /* 不生效 */
+        shiroFilterFactoryBean.setUnauthorizedUrl("/login/noRolePermission"); /* 未生效 */
+
         /* shiroFilter拦截链 */
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         /* fixme 自定义拦截链，Config中无法注入Mapper */

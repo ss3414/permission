@@ -51,6 +51,12 @@ Shiro配置（ShiroConfig）<br>
 
 ************************************************************************************************************************
 
+# jwt_shiro
+①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
+②Shiro整合JWT<br>
+
+************************************************************************************************************************
+
 # CAS准备工作
 ①CAS服务端<br>
 将修改过的CAS服务端cas.war（cas-server-4.0.0/不需要HTTPS）中的内容解压放到apache-tomcat-7.0.90(2)\cas\ROOT目录下<br>
@@ -84,11 +90,3 @@ Application @EnableCasClient（Springboot自动配置）<br>
 CAS单点登录的核心是：当cas_ssm登录过后，浏览器会保存CAS服务器的Cookie CASTGC，<br>
 当cas_springboot访问CAS服务器时会带上这个Cookie（这个Cookie cas_ssm/cas_springboot获取不到）<br>
 （除非CAS服务器将Cookie CASTGC跨域写入，否则无法跨域单点登录）<br>
-
-************************************************************************************************************************
-
-# 参考
-①http://how2j.cn/k/shiro/shiro-plan/1732.html（Shiro）<br>
-②https://www.iteye.com/topic/930648（数据库RBAC模型）<br>
-③https://blog.csdn.net/frankcheng5143/article/details/50836619（SpringMVC整合Shiro）<br>
-④https://blog.csdn.net/zzq900503/article/details/54693267（CAS单点登录）<br>
