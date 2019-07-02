@@ -11,4 +11,14 @@
         id, role_name
     </sql>
 
+    <select id="selectRoleList" resultMap="BaseResultMap" parameterType="com.model.User">
+        SELECT role.
+        <include refid="Base_Column_List"/>
+        FROM shiro_user user, shiro_user_role userRole, shiro_role role
+        WHERE user.id = userRole.user_id
+        AND userRole.role_id = role.id
+        AND user.user_name = #{userName}
+        GROUP BY role.id
+    </select>
+
 </mapper>

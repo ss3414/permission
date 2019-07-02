@@ -1,7 +1,6 @@
-package com.common.config;
+package com.common.shiro;
 
-import com.common.shiro.JWTFilter;
-import com.common.shiro.JWTRealm;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -11,17 +10,27 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
 
+    /* MD5加密，加密1次，使用Hex存储 */
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashIterations(1);
+        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return hashedCredentialsMatcher;
+    }
+
     /* 自定义Realm */
     @Bean
-    public JWTRealm JWTRealm() {
-        JWTRealm myRealm = new JWTRealm();
+    public RBACRealm RBACRealm() {
+        RBACRealm myRealm = new RBACRealm();
+        myRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return myRealm;
     }
 
@@ -29,7 +38,7 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(JWTRealm());
+        defaultWebSecurityManager.setRealm(RBACRealm());
         return defaultWebSecurityManager;
     }
 
@@ -38,16 +47,27 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean() {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager());
-        /* 自定义拦截器 */
-        Map<String, Filter> filters = new HashMap<>();
-        filters.put("jwt", new JWTFilter());
-        shiroFilterFactoryBean.setFilters(filters);
-        /* 自定义拦截链 */
+        /* 登录/登录成功/未授权URL */
+        shiroFilterFactoryBean.setLoginUrl("/login/login");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/login/noRolePermission"); /* 未生效 */
+
+        /* shiroFilter拦截链 */
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
-        filterChainDefinitionMap.put("/**", "jwt"); /* 让所有请求进入自定义拦截器 */
+        /* fixme 自定义拦截链，Config中无法注入Mapper */
+//        List<Filter> filterList = filterMapper.selectFilterListBySort();
+        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/login/**", "anon");
+        filterChainDefinitionMap.put("/doLogout", "logout");
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
+
+    /************************************************************分割线************************************************************/
+    /*
+     * ①分割线之上对应原shiro_ssm的Spring配置applicationContext.xml
+     * ②分割线之下对应SpringMVC配置dispatcher-servlet.xml
+     * */
 
     /* 开启Shiro AOP注解 */
     @Bean

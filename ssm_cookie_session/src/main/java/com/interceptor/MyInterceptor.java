@@ -33,7 +33,7 @@ public class MyInterceptor implements HandlerInterceptor {
          * */
         Map<String, Integer> map = new HashMap();
         map.put("login", 0);
-        map.put("front", 1);
+        map.put("model", 1);
         map.put("back", 2);
 
         String[] URIArray = request.getRequestURI().split("/");
@@ -58,14 +58,13 @@ public class MyInterceptor implements HandlerInterceptor {
             case 0:
                 return true;
             case 1:
-                return true;
             case 2:
                 User user = (User) request.getSession().getAttribute("user"); // 暂不考虑多线程问题，用户每次访问后台都会查询其权限
                 if (user != null) {
                     /* 细粒度权限控制，精确到具体方法 */
                     List<Permission> permissionList = permissionMapper.selectPermissionList(user);
                     for (Permission permission : permissionList) {
-                        if (permission.getPermissionName().equals(request.getRequestURI())) {
+                        if (permission.getPermissionUrl().equals(request.getRequestURI())) {
                             request.getSession().setAttribute("sessionUser", user);
                             return true;
                         }

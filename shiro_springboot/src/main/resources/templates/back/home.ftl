@@ -15,6 +15,16 @@
     <tr>
         <td><a href="/doLogout">Shiro注销</a></td>
     </tr>
+    <#list roleList as role>
+        <tr>
+            <td><a>${role.roleName}</a></td>
+        </tr>
+    </#list>
+    <#list permissionList as permission>
+        <tr>
+            <td><a href="${permission.permissionUrl}">${permission.permissionName}</a></td>
+        </tr>
+    </#list>
 </table>
 
 </body>

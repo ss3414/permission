@@ -17,12 +17,19 @@
     <tr>
         <td><a href="/login/logout">注销</a></td>
     </tr>
-    <tr>
-        <td><a href="/back/permission1">权限1</a></td>
-    </tr>
-    <tr>
-        <td><a href="/back/permission2">权限2</a></td>
-    </tr>
+    <c:forEach items="${roleList}" var="role">
+        <tr>
+            <td><a>${role.roleName}</a></td>
+        </tr>
+    </c:forEach>
+    <c:forEach items="${permissionList}" var="permission">
+        <tr>
+            <td><a href="${permission.permissionUrl}">${permission.permissionName}</a></td>
+        </tr>
+    </c:forEach>
+</table>
+
+<table border="1">
     <tr>
         <td>${user.id}</td>
     </tr>

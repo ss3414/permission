@@ -4,11 +4,13 @@
 
     <resultMap id="BaseResultMap" type="com.model.Permission">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="permission_name" property="permissionName" jdbcType="VARCHAR"/>
+        <result column="permission_status" property="permissionStatus"/>
+        <result column="permission_name" property="permissionName"/>
+        <result column="permission_url" property="permissionUrl"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, permission_name
+        id, permission_status, permission_name, permission_url
     </sql>
 
     <!--
@@ -18,7 +20,7 @@
     <select id="selectPermissionList" resultMap="BaseResultMap" parameterType="com.model.User">
         SELECT permission.
         <include refid="Base_Column_List"/>
-        FROM t_user user, t_user_role userRole, t_role role, t_role_permission rolePermission, t_permission permission
+        FROM shiro_user user, shiro_user_role userRole, shiro_role role, shiro_role_permission rolePermission, shiro_permission permission
         WHERE user.id = userRole.user_id
         AND userRole.role_id = role.id
         AND role.id = rolePermission.role_id

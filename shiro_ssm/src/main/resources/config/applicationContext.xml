@@ -66,7 +66,9 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login/login"/>
-        <property name="unauthorizedUrl" value="/login/noRolePermission"/>
+        <!-- 不生效，用UnauthorizedException代替 -->
+        <!--<property name="unauthorizedUrl" value="/login/noRolePermission"/>-->
+
         <!--
         shiroFilter拦截链
         ①可代替认证/授权注解
@@ -84,6 +86,15 @@
                 /doLogout = logout
                 /** = authc
             </value>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!-- 必需是JSP？ -->
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/login/noRolePermission</prop>
+            </props>
         </property>
     </bean>
 

@@ -1,5 +1,5 @@
 /************************************************************分割线************************************************************/
-/* todo shiro_rbac/shiro_web/shiro_ssm/shiro_springboot数据库结构 */
+/* todo 数据库结构 */
 
 CREATE TABLE `shiro_user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -37,7 +37,7 @@ CREATE TABLE `shiro_role_permission`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 /************************************************************半分割线******************************/
-/* shiro_rbac/shiro_web数据库内容 */
+/* shiro_rbac/shiro_web/ssm_cookie_session数据 */
 
 INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (1, 'user1', '123456');
 INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (2, 'user2', '123456');
@@ -49,21 +49,23 @@ INSERT INTO `shiro_role` VALUES (2, 'user');
 INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (1, 1, 1); /* user1拥有admin */
 INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (2, 2, 2); /* user2拥有user */
 
-INSERT INTO `shiro_permission` VALUES (1, 0, 'list', '');
-INSERT INTO `shiro_permission` VALUES (2, 0, 'create', '');
-INSERT INTO `shiro_permission` VALUES (3, 0, 'update', '');
-INSERT INTO `shiro_permission` VALUES (4, 0, 'delete', '');
+INSERT INTO `shiro_permission` VALUES (1, 0, '后台首页', '/back/home');
+INSERT INTO `shiro_permission` VALUES (2, 0, '查看Model', '/model/list');
+INSERT INTO `shiro_permission` VALUES (3, 0, '新增Model', '/model/create');
+INSERT INTO `shiro_permission` VALUES (4, 0, '修改Model', '/model/update');
+INSERT INTO `shiro_permission` VALUES (5, 0, '删除Model', '/model/delete');
 
 /* admin拥有所有权限 */
 INSERT INTO `shiro_role_permission` VALUES (1, 1, 1);
 INSERT INTO `shiro_role_permission` VALUES (2, 1, 2);
 INSERT INTO `shiro_role_permission` VALUES (3, 1, 3);
 INSERT INTO `shiro_role_permission` VALUES (4, 1, 4);
+INSERT INTO `shiro_role_permission` VALUES (5, 1, 5);
 /* user拥有部分权限 */
-INSERT INTO `shiro_role_permission` VALUES (5, 2, 1);
+INSERT INTO `shiro_role_permission` VALUES (6, 2, 1);
 
 /************************************************************半分割线******************************/
-/* shiro_ssm数据库内容 */
+/* shiro_ssm/shiro_springboot/jwt_shiro数据 */
 
 INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (1, 'user1', 'e10adc3949ba59abbe56e057f20f883e'); /* 密码123456 */
 INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (2, 'user2', 'e10adc3949ba59abbe56e057f20f883e');
@@ -89,7 +91,7 @@ INSERT INTO `shiro_role_permission` VALUES (4, 1, 4);
 INSERT INTO `shiro_role_permission` VALUES (5, 2, 1);
 
 /************************************************************半分割线******************************/
-/* shiro_springboot数据库内容 */
+/* shiro_springboot数据 */
 
 CREATE TABLE `shiro_filter`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -54,6 +54,23 @@ Shiro配置（ShiroConfig）<br>
 # jwt_shiro
 ①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
 ②Shiro整合JWT<br>
+③Shiro Session原理<br>
+登录时调用doGetAuthenticationInfo()登录<br>
+登录成功后用户信息被保存到全局的Subject中<br>
+授权时调用doGetAuthorizationInfo()查询权限（每次授权都要查询）<br>
+④Shiro JWT原理<br>
+自定义拦截器，拦截所有需要登录的请求<br>
+不带token登录则手动登录（登录成功后进入Shiro JWT系统中）<br>
+
+# 排列组合
+请求分为：不带token/带token<br>
+接口分为：不需要登录/需要登录/需要权限<br>
+①不带token/带token+不需要登录：前台/登录/登录失败/未登录/未授权（不需要登录，带token也不会调用Shiro）<br>
+②不带token+登录：用户不存在/密码错误/登录成功（发放token）<br>
+③不带token+需要登录：（@RequiresAuthentication）重定向至未登录<br>
+④带token+需要登录：（调用Shiro登录）token无效/用户不存在/密码错误/token有效<br>
+⑤不带token+需要权限：（@RequiresPermissions）重定向至未授权<br>
+⑥带token+需要权限：（调用Shiro登录）token无效/用户不存在/密码错误/token有效（再调用Shiro授权）<br>
 
 ************************************************************************************************************************
 

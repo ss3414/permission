@@ -12,13 +12,11 @@
         id, user_name, user_password
     </sql>
 
-    <!-- 查询是否存在此用户 -->
     <select id="selectUser" resultMap="BaseResultMap" parameterType="com.model.User">
         select
         <include refid="Base_Column_List"/>
-        from t_user
+        from shiro_user
         where user_name = #{userName,jdbcType=VARCHAR}
-        and user_password = #{userPassword,jdbcType=VARCHAR}
     </select>
 
 </mapper>

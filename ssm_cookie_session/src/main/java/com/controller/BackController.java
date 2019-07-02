@@ -1,46 +1,38 @@
 package com.controller;
 
+import com.mapper.PermissionMapper;
+import com.mapper.RoleMapper;
+import com.model.Permission;
+import com.model.Role;
 import com.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Controller
 @RequestMapping("/back")
 public class BackController {
 
-    /*
-     * 后台首页
-     * ①登录成功跳转后台
-     * */
+    @Autowired
+    private RoleMapper roleMapper;
+
+    @Autowired
+    private PermissionMapper permissionMapper;
+
     @RequestMapping("/home")
     public ModelAndView home(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user"); /* 登录成功时写入Session中的User */
-        User user2 = (User) request.getSession().getAttribute("sessionUser"); /* Interceptor写入的User */
-        return new ModelAndView("/back/home");
-    }
-
-    /* 权限1 */
-    @ResponseBody
-    @RequestMapping("/permission1")
-    public Map permission1() {
-        Map result = new HashMap();
-        result.put("success", "permission1");
-        return result;
-    }
-
-    /* 权限2 */
-    @ResponseBody
-    @RequestMapping("/permission2")
-    public Map permission2() {
-        Map result = new HashMap();
-        result.put("success", "permission1");
-        return result;
+        ModelAndView view = new ModelAndView("/back/home");
+        /* 根据用户拥有的权限决定其内容 */
+        User select = (User) request.getSession().getAttribute("user");
+        List<Role> roleList = roleMapper.selectRoleList(select);
+        List<Permission> permissionList = permissionMapper.selectPermissionList(select);
+        view.addObject("roleList", roleList);
+        view.addObject("permissionList", permissionList);
+        return view;
     }
 
 }
