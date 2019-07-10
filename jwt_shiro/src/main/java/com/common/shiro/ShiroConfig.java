@@ -44,7 +44,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         /* 不需要登录的接口（前台/登录/登录失败/未登录/未授权） */
         filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/test", "anon");
+        filterChainDefinitionMap.put("/json", "anon");
         filterChainDefinitionMap.put("/login/**", "anon");
         /* 拦截所有需要登录的请求 */
         filterChainDefinitionMap.put("/**", "jwt");

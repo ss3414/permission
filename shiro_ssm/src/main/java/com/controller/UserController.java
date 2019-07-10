@@ -9,42 +9,51 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/model")
-public class ModelController {
+@RequestMapping("/user")
+public class UserController {
 
     @ResponseBody
     @RequestMapping("/list")
-    @RequiresPermissions("/model/list")
+    @RequiresPermissions("user:list")
     public Map list() {
         Map result = new HashMap();
-        result.put("msg", "/model/list");
+        result.put("msg", "/user/list");
         return result;
     }
 
     @ResponseBody
     @RequestMapping("/create")
-    @RequiresPermissions("/model/create")
+    @RequiresPermissions("user:create")
     public Map create() {
         Map result = new HashMap();
-        result.put("msg", "/model/create");
+        result.put("msg", "/user/create");
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/get")
+    @RequiresPermissions("user:get")
+    public Map get() {
+        Map result = new HashMap();
+        result.put("msg", "/user/get");
         return result;
     }
 
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("/model/update")
+    @RequiresPermissions("user:update")
     public Map update() {
         Map result = new HashMap();
-        result.put("msg", "/model/update");
+        result.put("msg", "/user/update");
         return result;
     }
 
     @ResponseBody
     @RequestMapping("/delete")
-    @RequiresPermissions("/model/delete")
+    @RequiresPermissions("user:delete")
     public Map delete() {
         Map result = new HashMap();
-        result.put("msg", "/model/delete");
+        result.put("msg", "/user/delete");
         return result;
     }
 

@@ -1,5 +1,6 @@
 package com.common.shiro;
 
+import com.common.util.JDBCUtil;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -49,16 +52,25 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager());
         /* 登录/登录成功/未授权URL */
         shiroFilterFactoryBean.setLoginUrl("/login/login");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login/noRolePermission"); /* 未生效 */
+        shiroFilterFactoryBean.setUnauthorizedUrl("/login/noPermission"); /* 生效 */
+        /*
+         * shiroFilter拦截链
+         * ①路由写在2个拦截链中或写在1个拦截链中用逗号分割都需要用户同时拥有两种权限
+         * ②角色当作权限的集合，拦截链中禁止使用角色，也禁止使用/**通配符（authc除外）
+         * */
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+//        filterChainDefinitionMap.put("/", "anon");
+//        filterChainDefinitionMap.put("/login/**", "anon");
+//        filterChainDefinitionMap.put("/doLogout", "logout");
+//        filterChainDefinitionMap.put("/**", "authc");
 
-        /* shiroFilter拦截链 */
-        Map<String, String> filterChainDefinitionMap = new HashMap<>();
-        /* fixme 自定义拦截链，Config中无法注入Mapper */
-//        List<Filter> filterList = filterMapper.selectFilterListBySort();
-        filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/login/**", "anon");
-        filterChainDefinitionMap.put("/doLogout", "logout");
-        filterChainDefinitionMap.put("/**", "authc");
+        /* 此处注入Mapper/JDBCTemplate均报错，只能使用JDBC */
+        JDBCUtil util = new JDBCUtil();
+        List<Map<String, Object>> filterList = util.select("SELECT * FROM shiro_filter order by filter_sort");
+        for (int i = 0; i < filterList.size(); i++) {
+            filterChainDefinitionMap.put((String) filterList.get(i).get("filter_url"), (String) filterList.get(i).get("filter_name"));
+        }
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

@@ -21,11 +21,13 @@ public class Permission extends Model<Permission> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer permissionStatus;
+    private Integer parentId;
 
     private String permissionName;
 
     private String permissionUrl;
+
+    private String permissionPerm;
 
     @Override
     protected Serializable pkVal() {

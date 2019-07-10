@@ -59,7 +59,7 @@ public class RBACRealm extends AuthorizingRealm {
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         Set<String> stringPermissions = new HashSet<>();
         for (int i = 0; i < permissionList.size(); i++) {
-            stringPermissions.add(permissionList.get(i).getPermissionUrl());
+            stringPermissions.add(permissionList.get(i).getPermissionPerm());
         }
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

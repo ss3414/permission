@@ -11,7 +11,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
 
     /*
      * ①判断是否需要登录，如果不需要直接访问
-     * ②登录失败重定向
+     * ②登录成功放行，登录失败重定向
      * */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
@@ -19,7 +19,15 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             try {
                 executeLogin(request, response);
             } catch (Exception e) {
-                redirect(response);
+                String message = e.getMessage();
+                if ("用户不存在".equals(message)) {
+                    redirect("/login/exist", response);
+                } else if ("密码错误".equals(message)) {
+                    redirect("/login/error", response);
+                } else {
+                    /* token无效 */
+                    redirect("/login/invalid", response);
+                }
             }
         }
         return true;
@@ -44,10 +52,10 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     }
 
     /* 浏览器重定向 */
-    private void redirect(ServletResponse response) {
+    private void redirect(String redirect, ServletResponse response) {
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-            httpServletResponse.sendRedirect("/");
+            httpServletResponse.sendRedirect(redirect);
         } catch (Exception e) {
             e.printStackTrace();
         }

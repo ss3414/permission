@@ -25,7 +25,7 @@ public class Filter extends Model<Filter> {
 
     private String filterUrl;
 
-    private String filterPermission;
+    private String filterName;
 
     @Override
     protected Serializable pkVal() {

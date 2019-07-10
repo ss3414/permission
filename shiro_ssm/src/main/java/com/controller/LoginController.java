@@ -53,12 +53,12 @@ public class LoginController {
         return result;
     }
 
-    /* 没有角色/权限 */
+    /* 没有权限 */
     @ResponseBody
     @RequestMapping("/noRolePermission")
     public Map noRolePermission() {
         Map result = new HashMap();
-        result.put("msg", "没有角色/权限");
+        result.put("msg", "没有权限");
         return result;
     }
 

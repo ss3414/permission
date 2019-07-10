@@ -63,7 +63,9 @@ public class JWTRealm extends AuthorizingRealm {
     /* 授权 */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User select = (User) principalCollection.getPrimaryPrincipal();
+        String token = (String) principalCollection.getPrimaryPrincipal();
+        User select = new User();
+        select.setUserName(JWTUtil.getName(token));
 
         List<Role> roleList = roleMapper.selectRoleList(select);
         Set<String> stringRoles = new HashSet<>();
@@ -74,7 +76,7 @@ public class JWTRealm extends AuthorizingRealm {
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         Set<String> stringPermissions = new HashSet<>();
         for (int i = 0; i < permissionList.size(); i++) {
-            stringPermissions.add(permissionList.get(i).getPermissionUrl());
+            stringPermissions.add(permissionList.get(i).getPermissionPerm());
         }
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

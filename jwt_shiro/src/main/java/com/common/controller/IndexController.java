@@ -1,28 +1,27 @@
 package com.common.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("")
 public class IndexController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView index() {
         ModelAndView view = new ModelAndView("/index");
         return view;
     }
 
-    @ResponseBody
-    @RequestMapping("/json")
+    @GetMapping("/json")
     public Map json() {
         Map map = new HashMap();
-        map.put("status", 1000);
+        map.put("msg", "中文");
         return map;
     }
 
