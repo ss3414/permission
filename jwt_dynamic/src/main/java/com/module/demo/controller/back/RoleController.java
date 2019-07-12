@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.mapper.RolePermissionMapper;
 import com.module.demo.model.Role;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Api(description = "角色管理")
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -23,6 +28,7 @@ public class RoleController {
     @Autowired
     private RolePermissionMapper rolepermissionMapper;
 
+    @ApiOperation("角色列表")
     @GetMapping("/list")
     public Map<String, Object> list() {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -31,6 +37,10 @@ public class RoleController {
         return result;
     }
 
+    @ApiOperation("创建角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "roleName", value = "角色名", required = true),
+    })
     @PostMapping("/create")
     public Map<String, Object> create(Role role) {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -45,6 +55,10 @@ public class RoleController {
     }
 
     /* fixme 查看角色+角色拥有的权限 */
+    @ApiOperation("获取角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "角色Id", required = true),
+    })
     @GetMapping("/get")
     public Map<String, Object> get(Integer id) {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -58,6 +72,11 @@ public class RoleController {
         return result;
     }
 
+    @ApiOperation("更新角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "角色Id", required = true),
+            @ApiImplicitParam(name = "roleName", value = "角色名"),
+    })
     @PostMapping("/update")
     public Map<String, Object> update(Role role) {
         Map<String, Object> result = new LinkedHashMap<>();
@@ -72,6 +91,10 @@ public class RoleController {
     }
 
     /* fixme 正在使用的角色无法删除+同时删除user_role中对应数据 */
+    @ApiOperation("删除角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "角色Id", required = true),
+    })
     @GetMapping("/delete")
     public Map<String, Object> delete(Integer id) {
         Map<String, Object> result = new LinkedHashMap<>();

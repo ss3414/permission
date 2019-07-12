@@ -5,7 +5,7 @@
 
 # ssm_cookie_session
 ①SSM（JDK6）+RBAC<br>
-②Session+拦截器控制权限<br>
+②Cookie+拦截器控制权限<br>
 
 ************************************************************************************************************************
 
@@ -63,7 +63,7 @@ Shiro配置（ShiroConfig）<br>
 # jwt_shiro
 ①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
 ②Shiro整合JWT（固定权限）<br>
-③Shiro Session原理<br>
+③Shiro Cookie原理<br>
 登录时调用doGetAuthenticationInfo()登录<br>
 登录成功后用户信息被保存到全局的Subject中<br>
 授权时调用doGetAuthorizationInfo()查询权限（每次授权都要查询）<br>
@@ -73,8 +73,8 @@ JWTFilter拦截需要登录路由并调用JWTRealm登录<br>
 Shiro注解调用JWTRealm登录/授权<br>
 
 # jwt_dynamic
-①SpringBoot（JDK8）+MBP+JWT<br>
-②拦截器+JWT（动态权限）<br>
+①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
+②Shiro整合JWT（动态权限）<br>
 
 ************************************************************************************************************************
 

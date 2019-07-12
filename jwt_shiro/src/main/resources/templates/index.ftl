@@ -45,7 +45,7 @@
         <td>token：<input type="text" name="token" id="token2"></td>
     </tr>
     <tr>
-        <td><input type="button" value="/model/list" onclick="model()"></td>
+        <td><input type="button" value="/user/list" onclick="user()"></td>
     </tr>
 </table>
 
@@ -81,9 +81,9 @@
         });
     }
 
-    function model() {
+    function user() {
         $.ajax({
-            url: "/model/list",
+            url: "/user/list",
             headers: {
                 token: $("#token2").val(),
             },
