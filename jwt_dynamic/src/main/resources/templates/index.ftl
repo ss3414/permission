@@ -12,9 +12,6 @@
         <td><a href="/">首页</a></td>
     </tr>
     <tr>
-        <td><a href="/json">JSON</a></td>
-    </tr>
-    <tr>
         <td><a href="/swagger-ui.html">swagger2</a></td>
     </tr>
 </table>

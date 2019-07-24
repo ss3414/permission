@@ -23,9 +23,11 @@ public class Route extends Model<Route> {
 
     private Integer routeSort;
 
+    private String routeName;
+
     private String routeUrl;
 
-    private String routeName;
+    private String routePerm;
 
     @Override
     protected Serializable pkVal() {

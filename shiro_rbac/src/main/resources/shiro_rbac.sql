@@ -79,20 +79,29 @@ INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (1, 1, 1); /* u
 INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (2, 2, 2); /* user2拥有user */
 
 INSERT INTO `shiro_permission` VALUES (1, 0, '用户列表', '/user/list', 'user:list');
-INSERT INTO `shiro_permission` VALUES (2, 1, '新增用户', '/user/create', 'user:create');
-INSERT INTO `shiro_permission` VALUES (3, 1, '查看用户', '/user/get', 'user:get');
-INSERT INTO `shiro_permission` VALUES (4, 1, '修改用户', '/user/update', 'user:update');
-INSERT INTO `shiro_permission` VALUES (5, 1, '删除用户', '/user/delete', 'user:delete');
+INSERT INTO `shiro_permission` VALUES (2, 0, '新增用户', '/user/create', 'user:create');
+INSERT INTO `shiro_permission` VALUES (3, 0, '查看用户', '/user/get', 'user:get');
+INSERT INTO `shiro_permission` VALUES (4, 0, '修改用户', '/user/update', 'user:update');
+INSERT INTO `shiro_permission` VALUES (5, 0, '删除用户', '/user/delete', 'user:delete');
 INSERT INTO `shiro_permission` VALUES (6, 0, '角色列表', '/role/list', 'role:list');
-INSERT INTO `shiro_permission` VALUES (7, 6, '新增角色', '/role/create', 'role:create');
-INSERT INTO `shiro_permission` VALUES (8, 6, '查看角色', '/role/get', 'role:get');
-INSERT INTO `shiro_permission` VALUES (9, 6, '修改角色', '/role/update', 'role:update');
-INSERT INTO `shiro_permission` VALUES (10, 6, '删除角色', '/role/delete', 'role:delete');
+INSERT INTO `shiro_permission` VALUES (7, 0, '新增角色', '/role/create', 'role:create');
+INSERT INTO `shiro_permission` VALUES (8, 0, '查看角色', '/role/get', 'role:get');
+INSERT INTO `shiro_permission` VALUES (9, 0, '修改角色', '/role/update', 'role:update');
+INSERT INTO `shiro_permission` VALUES (10, 0, '删除角色', '/role/delete', 'role:delete');
 INSERT INTO `shiro_permission` VALUES (11, 0, '权限列表', '/perm/list', 'permission:list');
-INSERT INTO `shiro_permission` VALUES (12, 11, '新增权限', '/perm/create', 'permission:create');
-INSERT INTO `shiro_permission` VALUES (13, 11, '查看权限', '/perm/get', 'permission:get');
-INSERT INTO `shiro_permission` VALUES (14, 11, '修改权限', '/perm/update', 'permission:update');
-INSERT INTO `shiro_permission` VALUES (15, 11, '删除权限', '/perm/delete', 'permission:delete');
+INSERT INTO `shiro_permission` VALUES (12, 0, '新增权限', '/perm/create', 'permission:create');
+INSERT INTO `shiro_permission` VALUES (13, 0, '查看权限', '/perm/get', 'permission:get');
+INSERT INTO `shiro_permission` VALUES (14, 0, '修改权限', '/perm/update', 'permission:update');
+INSERT INTO `shiro_permission` VALUES (15, 0, '删除权限', '/perm/delete', 'permission:delete');
+INSERT INTO `shiro_permission` VALUES (16, 0, '新增用户角色关联', '/userRole/create', 'userRole:create');
+INSERT INTO `shiro_permission` VALUES (17, 0, '删除用户角色关联', '/userRole/delete', 'userRole:delete');
+INSERT INTO `shiro_permission` VALUES (18, 0, '新增角色权限关联', '/rolePerm/create', 'rolePerm:create');
+INSERT INTO `shiro_permission` VALUES (19, 0, '删除角色权限关联', '/rolePerm/delete', 'rolePerm:delete');
+INSERT INTO `shiro_permission` VALUES (20, 0, '路由列表', '/route/list', 'route:list');
+INSERT INTO `shiro_permission` VALUES (21, 0, '新增路由', '/route/create', 'route:create');
+INSERT INTO `shiro_permission` VALUES (22, 0, '查看路由', '/route/get', 'route:get');
+INSERT INTO `shiro_permission` VALUES (23, 0, '修改路由', '/route/update', 'route:update');
+INSERT INTO `shiro_permission` VALUES (24, 0, '删除路由', '/route/delete', 'route:delete');
 
 /* admin拥有所有权限 */
 INSERT INTO `shiro_role_permission` VALUES (1, 1, 1);
@@ -110,8 +119,17 @@ INSERT INTO `shiro_role_permission` VALUES (12, 1, 12);
 INSERT INTO `shiro_role_permission` VALUES (13, 1, 13);
 INSERT INTO `shiro_role_permission` VALUES (14, 1, 14);
 INSERT INTO `shiro_role_permission` VALUES (15, 1, 15);
+INSERT INTO `shiro_role_permission` VALUES (16, 1, 16);
+INSERT INTO `shiro_role_permission` VALUES (17, 1, 17);
+INSERT INTO `shiro_role_permission` VALUES (18, 1, 18);
+INSERT INTO `shiro_role_permission` VALUES (19, 1, 19);
+INSERT INTO `shiro_role_permission` VALUES (20, 1, 20);
+INSERT INTO `shiro_role_permission` VALUES (21, 1, 21);
+INSERT INTO `shiro_role_permission` VALUES (22, 1, 22);
+INSERT INTO `shiro_role_permission` VALUES (23, 1, 23);
+INSERT INTO `shiro_role_permission` VALUES (24, 1, 24);
 /* user拥有部分权限 */
-INSERT INTO `shiro_role_permission` VALUES (16, 2, 1);
+INSERT INTO `shiro_role_permission` VALUES (25, 2, 1);
 
 /************************************************************半分割线******************************/
 /* shiro_springboot数据 */
@@ -120,7 +138,7 @@ CREATE TABLE `shiro_filter`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filter_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
   `filter_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `filter_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `filter_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -147,30 +165,40 @@ INSERT INTO `shiro_filter` VALUES (19, 2, '/perm/delete', 'perms[permission:dele
 /************************************************************半分割线******************************/
 /* jwt_dynamic数据 */
 
-CREATE TABLE `route_route`  (
+CREATE TABLE `shiro_route`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `route_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
-  `route_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   `route_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `route_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `route_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (0, '/', 'anon');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (0, '/login/doLogin', 'anon');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (0, '/doLogout', 'logout');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (1, '/back/home', 'authc');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/user/list', 'perms[user:list]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/user/create', 'perms[user:create]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/user/get', 'perms[user:get]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/user/update', 'perms[user:update]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/user/delete', 'perms[user:delete]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/role/list', 'perms[role:list]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/role/create', 'perms[role:create]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/role/get', 'perms[role:get]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/role/update', 'perms[role:update]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/role/delete', 'perms[role:delete]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/perm/list', 'perms[permission:list]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/perm/create', 'perms[permission:create]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/perm/get', 'perms[permission:get]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/perm/update', 'perms[permission:update]');
-INSERT INTO `shiro_route`(`route_sort`, `route_url`, `route_name`) VALUES (2, '/perm/delete', 'perms[permission:delete]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/', 'anon');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/login/doLogin', 'anon');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/doLogout', 'logout');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (1, '', '/back/home', 'authc');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/list', 'perms[user:list]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/create', 'perms[user:create]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/get', 'perms[user:get]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/update', 'perms[user:update]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/delete', 'perms[user:delete]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/role/list', 'perms[role:list]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/role/create', 'perms[role:create]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/role/get', 'perms[role:get]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/role/update', 'perms[role:update]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/role/delete', 'perms[role:delete]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/perm/list', 'perms[permission:list]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/perm/create', 'perms[permission:create]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/perm/get', 'perms[permission:get]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/perm/update', 'perms[permission:update]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/perm/delete', 'perms[permission:delete]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/userRole/create', 'perms[userRole:create]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/userRole/delete', 'perms[userRole:delete]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/rolePerm/create', 'perms[rolePerm:create]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/rolePerm/delete', 'perms[rolePerm:delete]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/route/list', 'perms[route:list]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/route/create', 'perms[route:create]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/route/get', 'perms[route:get]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/route/update', 'perms[route:update]');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/route/delete', 'perms[route:delete]');

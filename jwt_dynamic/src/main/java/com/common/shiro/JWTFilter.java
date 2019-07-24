@@ -29,15 +29,15 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String URI = httpServletRequest.getRequestURI();
 
         JDBCUtil util = new JDBCUtil();
-        List<Map<String, Object>> filterList = util.select("SELECT * FROM shiro_filter order by filter_sort");
-        for (Map<String, Object> filter : filterList) {
-            if (filter.get("filter_url").equals(URI)) {
-                if (filter.get("filter_name").equals("anon")) { /* 不需要登录 */
+        List<Map<String, Object>> routeList = util.select("SELECT * FROM shiro_route order by route_sort");
+        for (Map<String, Object> route : routeList) {
+            if (route.get("route_url").equals(URI)) {
+                if (route.get("route_perm").equals("anon")) { /* 不需要登录 */
                     return true;
-                } else if (filter.get("filter_name").equals("logout")) { /* fixme JWT注销即用户抛弃token */
+                } else if (route.get("route_perm").equals("logout")) { /* fixme JWT注销即用户抛弃token */
                     getSubject(request, response).logout();
                     return true;
-                } else if (filter.get("filter_name").equals("authc")) {
+                } else if (route.get("route_perm").equals("authc")) {
                     try {
                         String token = httpServletRequest.getHeader("token");
                         JWTToken jwtToken = new JWTToken(token);
@@ -46,11 +46,15 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
                         return msg(response, "token无效");
                     }
                     return true;
-                } else if (((String) filter.get("filter_name")).contains("perms")) {
+                } else if (((String) route.get("route_perm")).contains("perms")) {
                     Pattern pattern = Pattern.compile("perms\\[(.*)]");
-                    Matcher matcher = pattern.matcher((String) filter.get("filter_name"));
+                    Matcher matcher = pattern.matcher((String) route.get("route_perm"));
                     while (matcher.find()) {
                         try {
+                            /* fixme 授权前需要登录，否则会使用之前的token */
+                            String token = httpServletRequest.getHeader("token");
+                            JWTToken jwtToken = new JWTToken(token);
+                            getSubject(request, response).login(jwtToken);
                             getSubject(request, response).checkPermission(matcher.group(1)); /* 调用Realm.doGetAuthorizationInfo()授权 */
                         } catch (Exception e) {
                             e.printStackTrace();

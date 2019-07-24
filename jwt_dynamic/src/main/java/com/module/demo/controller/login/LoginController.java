@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Api(description = "登录")
@@ -35,7 +35,7 @@ public class LoginController {
         user.setUserName(name);
         user = userMapper.selectUser(user);
 
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         if (user == null) {
             result.put("msg", "用户不存在");
         } else if (!user.getUserPassword().equals(MD5Util.md5(password))) {

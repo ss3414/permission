@@ -7,12 +7,12 @@
         <id column="id" property="id"/>
         <result column="filter_sort" property="filterSort"/>
         <result column="filter_url" property="filterUrl"/>
-        <result column="filter_name" property="filterName"/>
+        <result column="filter_perm" property="filterPerm"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, filter_sort, filter_url, filter_name
+        id, filter_sort, filter_url, filter_perm
     </sql>
 
     <select id="selectFilterListBySort" resultMap="BaseResultMap">
