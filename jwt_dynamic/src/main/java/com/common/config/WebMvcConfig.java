@@ -12,8 +12,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     /* 静态资源 */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-
         /* 第三方Swagger2配置失效，需要手动配置 */
         registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
