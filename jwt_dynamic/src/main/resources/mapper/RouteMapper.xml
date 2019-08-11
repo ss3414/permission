@@ -16,11 +16,4 @@
         id, route_sort, route_name, route_url, route_perm
     </sql>
 
-    <select id="selectRouteListBySort" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from shiro_route
-        order by route_sort
-    </select>
-
 </mapper>

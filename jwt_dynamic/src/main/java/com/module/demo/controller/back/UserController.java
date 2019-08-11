@@ -67,7 +67,7 @@ public class UserController {
     public Map<String, Object> create(User user) {
         Map<String, Object> result = new LinkedHashMap<>();
         try {
-            User exist = userMapper.selectUser(user);
+            User exist = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, user.getUserName()));
             if (exist != null) {
                 result.put("msg", "用户已被创建");
             } else {

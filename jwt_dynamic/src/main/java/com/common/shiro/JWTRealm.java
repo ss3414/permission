@@ -1,5 +1,6 @@
 package com.common.shiro;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.mapper.UserMapper;
@@ -48,9 +49,7 @@ public class JWTRealm extends AuthorizingRealm {
         if (name == null) {
             throw new AuthenticationException("token无效");
         } else {
-            User user = new User();
-            user.setUserName(name);
-            user = userMapper.selectUser(user);
+            User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
             if (user == null) {
                 throw new AuthenticationException("用户不存在");
             } else if (!JWTUtil.verify(token, name, user.getUserPassword())) {
@@ -68,9 +67,7 @@ public class JWTRealm extends AuthorizingRealm {
         if (name == null) {
             throw new AuthenticationException("token无效");
         } else {
-            User user = new User();
-            user.setUserName(name);
-            user = userMapper.selectUser(user);
+            User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
             if (user == null) {
                 throw new AuthenticationException("用户不存在");
             } else if (!JWTUtil.verify(token, name, user.getUserPassword())) {
