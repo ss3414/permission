@@ -21,6 +21,8 @@ public class User extends Model<User> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    private String uuid;
+
     private String userName;
 
     private String userPassword;

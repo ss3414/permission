@@ -1,4 +1,4 @@
-package com.common.shiro;
+package com.common.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -37,6 +37,7 @@ public class JWTUtil {
             verifier.verify(token);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

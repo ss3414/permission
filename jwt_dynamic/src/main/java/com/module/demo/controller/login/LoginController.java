@@ -1,7 +1,7 @@
 package com.module.demo.controller.login;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.common.shiro.JWTUtil;
+import com.common.util.JWTUtil;
 import com.common.util.MD5Util;
 import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.User;

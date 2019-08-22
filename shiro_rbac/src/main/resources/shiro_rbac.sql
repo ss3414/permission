@@ -3,6 +3,7 @@
 
 CREATE TABLE `shiro_user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   `user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE
@@ -40,15 +41,15 @@ CREATE TABLE `shiro_role_permission`  (
 /************************************************************半分割线******************************/
 /* shiro_rbac/shiro_web/ssm_cookie_session数据 */
 
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (1, 'user1', '123456');
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (2, 'user2', '123456');
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (3, 'user3', '123456');
+INSERT INTO `shiro_user` VALUES (1, '5f2fc818-c4a1-11e9-8b6e-94c6910c8b5c', 'user1', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shiro_user` VALUES (2, '6a53ad1c-c4a1-11e9-a589-94c6910c8b5c', 'user2', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shiro_user` VALUES (3, '72311998-c4a1-11e9-a09a-94c6910c8b5c', 'user3', 'e10adc3949ba59abbe56e057f20f883e');
 
 INSERT INTO `shiro_role` VALUES (1, 'admin');
 INSERT INTO `shiro_role` VALUES (2, 'user');
 
-INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (1, 1, 1); /* user1拥有admin */
-INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (2, 2, 2); /* user2拥有user */
+INSERT INTO `shiro_user_role` VALUES (1, 1, 1); /* user1拥有admin */
+INSERT INTO `shiro_user_role` VALUES (2, 2, 2); /* user2拥有user */
 
 INSERT INTO `shiro_permission` VALUES (1, 0, '后台首页', '/back/home', 'back:home');
 INSERT INTO `shiro_permission` VALUES (2, 1, '查看Model', '/model/list', 'model:list');
@@ -68,15 +69,15 @@ INSERT INTO `shiro_role_permission` VALUES (6, 2, 1);
 /************************************************************半分割线******************************/
 /* shiro_ssm/shiro_springboot/jwt_shiro/jwt_dynamic数据 */
 
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (1, 'user1', 'e10adc3949ba59abbe56e057f20f883e'); /* 密码123456 */
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (2, 'user2', 'e10adc3949ba59abbe56e057f20f883e');
-INSERT INTO `shiro_user`(`id`, `user_name`, `user_password`) VALUES (3, 'user3', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shiro_user` VALUES (1, '5f2fc818-c4a1-11e9-8b6e-94c6910c8b5c', 'user1', 'e10adc3949ba59abbe56e057f20f883e'); /* 密码123456 */
+INSERT INTO `shiro_user` VALUES (2, '6a53ad1c-c4a1-11e9-a589-94c6910c8b5c', 'user2', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shiro_user` VALUES (3, '72311998-c4a1-11e9-a09a-94c6910c8b5c', 'user3', 'e10adc3949ba59abbe56e057f20f883e');
 
 INSERT INTO `shiro_role` VALUES (1, 'admin');
 INSERT INTO `shiro_role` VALUES (2, 'user');
 
-INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (1, 1, 1); /* user1拥有admin */
-INSERT INTO `shiro_user_role`(`id`, `user_id`, `role_id`) VALUES (2, 2, 2); /* user2拥有user */
+INSERT INTO `shiro_user_role` VALUES (1, 1, 1); /* user1拥有admin */
+INSERT INTO `shiro_user_role` VALUES (2, 2, 2); /* user2拥有user */
 
 INSERT INTO `shiro_permission` VALUES (1, 0, '用户列表', '/user/list', 'user:list');
 INSERT INTO `shiro_permission` VALUES (2, 0, '新增用户', '/user/create', 'user:create');
@@ -176,7 +177,7 @@ CREATE TABLE `shiro_route`  (
 
 INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/', 'anon');
 INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/login/doLogin', 'anon');
-INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/doLogout', 'logout');
+INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/login/doLogout', 'logout');
 INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (1, '', '/back/home', 'authc');
 INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/list', 'perms[user:list]');
 INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (2, '', '/user/create', 'perms[user:create]');

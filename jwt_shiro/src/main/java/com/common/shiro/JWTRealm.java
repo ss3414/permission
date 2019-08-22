@@ -1,5 +1,6 @@
 package com.common.shiro;
 
+import com.common.util.JWTUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.mapper.UserMapper;

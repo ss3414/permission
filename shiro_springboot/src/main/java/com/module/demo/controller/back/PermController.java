@@ -1,16 +1,17 @@
 package com.module.demo.controller.back;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.module.demo.mapper.PermissionMapper;
+import com.module.demo.mapper.RolePermissionMapper;
 import com.module.demo.model.Permission;
-import com.module.demo.service.ShiroFilterService;
+import com.module.demo.model.RolePermission;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,22 +22,37 @@ public class PermController {
     private PermissionMapper permissionMapper;
 
     @Autowired
-    private ShiroFilterService shiroFilterService;
+    private RolePermissionMapper rolePermissionMapper;
 
     @GetMapping("/list")
-    public Map<String, Object> list() {
+    public Map<String, Object> list(
+            @RequestParam(defaultValue = "1") Integer currentPage,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            String permissionName) {
+        Page<Permission> permissionPage = new Page<>();
+        permissionPage.setCurrent(currentPage);
+        permissionPage.setSize(pageSize);
+        IPage<Permission> permissionList = new Page<>();
+        if (permissionName != null && !permissionName.isEmpty()) {
+            permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<Permission>().lambda().eq(Permission::getPermissionName, permissionName));
+        } else {
+            permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<Permission>());
+        }
+
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("msg", "权限列表信息");
-        result.put("data", permissionMapper.selectList(new QueryWrapper<Permission>()));
+        Map data = new LinkedHashMap();
+        data.put("permissionList", permissionList.getRecords());
+        result.put("data", data);
         return result;
     }
 
-    /* fixme 每次新增权限自动附加到管理员角色上并即时生效 */
     @PostMapping("/create")
-    public Map<String, Object> create(Permission perm) {
+    public Map<String, Object> create(Permission permission) {
         Map<String, Object> result = new LinkedHashMap<>();
         try {
-            permissionMapper.insert(perm);
+            permissionMapper.insert(permission);
+            rolePermissionMapper.insert(new RolePermission().setRoleId(1).setPermissionId(permission.getId())); /* 角色1为管理员角色 */
             result.put("msg", "权限创建成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +66,9 @@ public class PermController {
         Map<String, Object> result = new LinkedHashMap<>();
         try {
             result.put("msg", "权限获取成功");
-            result.put("data", permissionMapper.selectById(id));
+            Map data = new LinkedHashMap();
+            data.put("permission", permissionMapper.selectById(id));
+            result.put("data", data);
         } catch (Exception e) {
             e.printStackTrace();
             result.put("msg", "权限获取失败");
@@ -58,12 +76,11 @@ public class PermController {
         return result;
     }
 
-    /* 不准修改perm_name */
     @PostMapping("/update")
-    public Map<String, Object> update(Permission perm) {
+    public Map<String, Object> update(Permission permission) {
         Map<String, Object> result = new LinkedHashMap<>();
         try {
-            permissionMapper.updateById(perm);
+            permissionMapper.updateById(permission);
             result.put("msg", "权限更新成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,16 +89,24 @@ public class PermController {
         return result;
     }
 
-    /* fixme 正在使用的权限无法删除+多级权限问题+同时删除role_permission中对应数据 */
     @GetMapping("/delete")
     public Map<String, Object> delete(Integer id) {
         Map<String, Object> result = new LinkedHashMap<>();
-        try {
-            permissionMapper.deleteById(id);
-            result.put("msg", "权限删除成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.put("msg", "权限删除失败");
+        List<RolePermission> rolePermissionList = rolePermissionMapper.selectList(new QueryWrapper<RolePermission>().lambda()
+                .eq(RolePermission::getPermissionId, id)
+                .ne(RolePermission::getRoleId, 1) /* 不包括默认管理员角色 */
+        );
+        if (rolePermissionList.size() > 0) {
+            result.put("msg", "权限删除失败，正在使用的权限无法删除");
+        } else {
+            try {
+                permissionMapper.deleteById(id);
+                rolePermissionMapper.delete(new QueryWrapper<RolePermission>().lambda().eq(RolePermission::getPermissionId, id));
+                result.put("msg", "权限删除成功");
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.put("msg", "权限删除失败");
+            }
         }
         return result;
     }

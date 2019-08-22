@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Api(description = "用户管理")
 @RestController
@@ -71,6 +72,7 @@ public class UserController {
             if (exist != null) {
                 result.put("msg", "用户已被创建");
             } else {
+                user.setUuid(UUID.randomUUID().toString());
                 user.setUserPassword(MD5Util.md5(user.getUserPassword()));
                 userMapper.insert(user);
                 result.put("msg", "用户创建成功");

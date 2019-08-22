@@ -1,6 +1,7 @@
 package com.common.shiro;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.common.util.JWTUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.mapper.UserMapper;
