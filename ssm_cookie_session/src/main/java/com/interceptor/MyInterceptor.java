@@ -17,7 +17,7 @@ import java.util.Map;
 public class MyInterceptor implements HandlerInterceptor {
 
     @Autowired
-    PermissionMapper permissionMapper;
+    private PermissionMapper permissionMapper;
 
     /*
      * （下一个拦截器/Controller）处理请求前调用，第三个参数o为（下一个拦截器/Controller）

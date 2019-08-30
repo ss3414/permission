@@ -1,6 +1,6 @@
 package com.module.demo.controller;
 
-import com.common.shiro.JWTUtil;
+import com.common.util.JWTUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.model.Permission;
