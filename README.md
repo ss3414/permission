@@ -22,7 +22,7 @@
 ①Java EE（JDK6）+Shiro<br>
 ②将Shiro整合进原生Java Web项目中<br>
 数据库结构/Realm同shiro_rbac<br>
-③技术细节<br>
+③归档<br>
 Main/Test项目是一次性的，Web项目是持续的<br>
 通过web.xml中的配置，Shiro被整合进Java Web项目中<br>
 Shiro单独配置shiro.ini决定每个路由所需要的权限<br>
@@ -31,7 +31,7 @@ Shiro单独配置shiro.ini决定每个路由所需要的权限<br>
 ①SSM（JDK6）+Shiro<br>
 ②Shiro整合SSM<br>
 数据库结构同shiro_rbac，Realm调用MyBatis<br>
-③技术细节<br>
+③归档<br>
 Java Web先整合SSM，再整合Shiro<br>
 权限可以由INI/XML/注解/Java代码决定<br>
 MD5加密<br>
@@ -75,3 +75,4 @@ Shiro注解调用JWTRealm登录/授权<br>
 # jwt_dynamic
 ①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
 ②Shiro整合JWT（动态权限）<br>
+③引入Redis和Spring Cache<br>

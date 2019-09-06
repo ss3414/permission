@@ -2,6 +2,7 @@ package com.common.shiro;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.common.util.JWTUtil;
+import com.common.util.RedisUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.mapper.UserMapper;
@@ -17,6 +18,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +35,15 @@ public class JWTRealm extends AuthorizingRealm {
 
     @Autowired
     private PermissionMapper permissionMapper;
+
+    @Value("${redis.open}")
+    private Boolean redisOpen;
+
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
+    private CacheManager cacheManager;
 
     /*
      * ①必需重写此方法，否则报错
@@ -55,6 +67,16 @@ public class JWTRealm extends AuthorizingRealm {
                 throw new AuthenticationException("用户不存在");
             } else if (!JWTUtil.verify(token, name, user.getUserPassword())) {
                 throw new AuthenticationException("密码错误");
+            } else {
+                String cacheToken = "";
+                if (redisOpen) {
+                    cacheToken = redisUtil.read(user.getUuid());
+                } else {
+                    cacheToken = cacheManager.getCache("user").get(user.getUuid(), String.class);
+                }
+                if (!token.equals(cacheToken)) {
+                    throw new AuthenticationException("token无效");
+                }
             }
         }
         return new SimpleAuthenticationInfo(token, token, "JWTRealm");
