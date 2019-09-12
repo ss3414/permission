@@ -92,7 +92,7 @@
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <!-- 必需是JSP？ -->
+                <!-- 必须是JSP？ -->
                 <prop key="org.apache.shiro.authz.UnauthorizedException">/login/noRolePermission</prop>
             </props>
         </property>

@@ -46,7 +46,7 @@ public class JWTRealm extends AuthorizingRealm {
     private CacheManager cacheManager;
 
     /*
-     * ①必需重写此方法，否则报错
+     * ①必须重写此方法，否则报错
      * ②此处将AuthenticationToken转换为JWTToken
      * */
     @Override
