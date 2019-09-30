@@ -11,9 +11,9 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 @Data
+@Accessors(chain = true)
 @TableName("shiro_user")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;

@@ -13,9 +13,9 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
+@Accessors(chain = true)
 @TableName("shiro_permission")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class Permission extends Model<Permission> {
 
     private static final long serialVersionUID = 1L;

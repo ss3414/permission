@@ -6,13 +6,7 @@ import java.util.*;
 
 public class JDBCUtil {
 
-    private String url;
-
-    private String username;
-
-    private String password;
-
-    private String driver;
+    private Connection connection;
 
     /* 初始化JDBCUtil时，手动获取数据库配置 */
     public JDBCUtil() {
@@ -20,10 +14,11 @@ public class JDBCUtil {
         Properties properties = new Properties();
         try {
             properties.load(inputStream);
-            url = properties.getProperty("spring.datasource.druid.url");
-            username = properties.getProperty("spring.datasource.druid.username");
-            password = properties.getProperty("spring.datasource.druid.password");
-            driver = properties.getProperty("spring.datasource.druid.driver-class-name");
+            String url = properties.getProperty("spring.datasource.druid.url");
+            String username = properties.getProperty("spring.datasource.druid.username");
+            String password = properties.getProperty("spring.datasource.druid.password");
+            Class.forName("spring.datasource.druid.driver-class-name");
+            connection = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,8 +27,6 @@ public class JDBCUtil {
     public List<Map<String, Object>> select(String SQL) {
         List<Map<String, Object>> resultList = new ArrayList<>();
         try {
-            Class.forName(driver);
-            Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL);
             while (resultSet.next()) {
@@ -47,7 +40,6 @@ public class JDBCUtil {
             }
             resultSet.close();
             statement.close();
-            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

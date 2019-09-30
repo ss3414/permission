@@ -11,9 +11,9 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 @Data
+@Accessors(chain = true)
 @TableName("shiro_route")
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class Route extends Model<Route> {
 
     private static final long serialVersionUID = 1L;

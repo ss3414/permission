@@ -63,6 +63,13 @@
             <version>1.2.4</version>
         </dependency>
 
+        <!-- 工具 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+        </dependency>
+
         <!-- 日志+测试 -->
         <dependency>
             <groupId>commons-logging</groupId>
