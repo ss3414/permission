@@ -59,7 +59,7 @@ public class MyInterceptor implements HandlerInterceptor {
                 return true;
             case 1:
             case 2:
-                User user = (User) request.getSession().getAttribute("user"); // 暂不考虑多线程问题，用户每次访问后台都会查询其权限
+                User user = (User) request.getSession().getAttribute("user"); /* 暂不考虑多线程问题，用户每次访问后台都会查询其权限 */
                 if (user != null) {
                     /* 细粒度权限控制，精确到具体方法 */
                     List<Permission> permissionList = permissionMapper.selectPermissionList(user);
@@ -69,9 +69,9 @@ public class MyInterceptor implements HandlerInterceptor {
                             return true;
                         }
                     }
-                    return returnFalse(response); // 没有权限
+                    return returnFalse(response); /* 没有权限 */
                 }
-                return returnFalse(response); // 未登录
+                return returnFalse(response); /* 未登录 */
             default:
                 return true;
         }

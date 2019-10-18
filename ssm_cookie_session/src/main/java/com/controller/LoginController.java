@@ -72,7 +72,7 @@ public class LoginController {
             response.addCookie(cookie);
             view.setViewName("redirect:/back/home");
         } else {
-            view.setViewName("redirect:/login/loginFailure"); // 登录失败页面
+            view.setViewName("redirect:/login/loginFailure"); /* 登录失败页面 */
         }
         return view;
     }
@@ -83,7 +83,7 @@ public class LoginController {
      * */
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request) {
-        request.getSession().invalidate(); // 删除整个Session
+        request.getSession().invalidate(); /* 删除整个Session */
         return new ModelAndView("/login/login");
     }
 
