@@ -27,7 +27,7 @@ public class BackController {
     /* 后台首页（登录后就允许访问） */
     @RequestMapping("/home")
     public ModelAndView home() {
-        ModelAndView view = new ModelAndView("/back/home");
+        ModelAndView view = new ModelAndView();
         /* 根据用户拥有的权限决定其内容 */
         Subject subject = SecurityUtils.getSubject();
         User select = (User) subject.getPrincipal();
@@ -35,6 +35,7 @@ public class BackController {
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         view.addObject("roleList", roleList);
         view.addObject("permissionList", permissionList);
+        view.setViewName("/back/home");
         return view;
     }
 

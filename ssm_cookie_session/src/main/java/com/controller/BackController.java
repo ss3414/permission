@@ -25,13 +25,14 @@ public class BackController {
 
     @RequestMapping("/home")
     public ModelAndView home(HttpServletRequest request) {
-        ModelAndView view = new ModelAndView("/back/home");
+        ModelAndView view = new ModelAndView();
         /* 根据用户拥有的权限决定其内容 */
         User select = (User) request.getSession().getAttribute("user");
         List<Role> roleList = roleMapper.selectRoleList(select);
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         view.addObject("roleList", roleList);
         view.addObject("permissionList", permissionList);
+        view.setViewName("/back/home");
         return view;
     }
 

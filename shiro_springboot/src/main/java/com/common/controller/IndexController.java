@@ -11,8 +11,7 @@ public class IndexController {
 
     @GetMapping("/")
     public ModelAndView index() {
-        ModelAndView view = new ModelAndView("/index");
-        return view;
+        return new ModelAndView("/index");
     }
 
 }
