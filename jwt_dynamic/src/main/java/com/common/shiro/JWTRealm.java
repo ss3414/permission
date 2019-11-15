@@ -1,7 +1,6 @@
 package com.common.shiro;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.common.util.JWTUtil;
 import com.common.util.RedisUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
@@ -20,6 +19,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
+import untitled.JWT;
 
 import java.util.HashSet;
 import java.util.List;
@@ -58,14 +58,14 @@ public class JWTRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String token = (String) authenticationToken.getCredentials(); /* 此处token由JWTFilter获取 */
-        String name = JWTUtil.getName(token);
+        String name = JWT.getName(token);
         if (name == null) {
             throw new AuthenticationException("token无效");
         } else {
             User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
             if (user == null) {
                 throw new AuthenticationException("用户不存在");
-            } else if (!JWTUtil.verify(token, name, user.getUserPassword())) {
+            } else if (!JWT.verify(token, name, user.getUserPassword())) {
                 throw new AuthenticationException("密码错误");
             } else {
                 String cacheToken = "";
@@ -86,14 +86,14 @@ public class JWTRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String token = (String) principalCollection.getPrimaryPrincipal();
-        String name = JWTUtil.getName(token);
+        String name = JWT.getName(token);
         if (name == null) {
             throw new AuthenticationException("token无效");
         } else {
             User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
             if (user == null) {
                 throw new AuthenticationException("用户不存在");
-            } else if (!JWTUtil.verify(token, name, user.getUserPassword())) {
+            } else if (!JWT.verify(token, name, user.getUserPassword())) {
                 throw new AuthenticationException("密码错误");
             }
         }

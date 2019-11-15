@@ -1,15 +1,17 @@
 package com.common.shiro;
 
-import com.common.util.JDBCUtil;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import sql.JDBC1;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +30,21 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String URI = httpServletRequest.getRequestURI();
 
-        JDBCUtil util = new JDBCUtil();
+        InputStream inputStream = JWTFilter.class.getResourceAsStream("/application.properties");
+        Properties properties = new Properties();
+        String url = "";
+        String username = "";
+        String password = "";
+        try {
+            properties.load(inputStream);
+            url = properties.getProperty("spring.datasource.druid.url");
+            username = properties.getProperty("spring.datasource.druid.username");
+            password = properties.getProperty("spring.datasource.druid.password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JDBC1 util = new JDBC1(url, username, password);
+
         List<Map<String, Object>> routeList = util.select("SELECT * FROM shiro_route order by route_sort");
         for (Map<String, Object> route : routeList) {
             if (route.get("route_url").equals(URI)) {

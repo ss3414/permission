@@ -1,9 +1,9 @@
 package com.module.demo.controller.back;
 
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.common.util.MD5Util;
 import com.module.demo.mapper.UserMapper;
 import com.module.demo.mapper.UserRoleMapper;
 import com.module.demo.model.User;
@@ -57,7 +57,7 @@ public class UserController {
                 result.put("msg", "用户已被创建");
             } else {
                 user.setUuid(UUID.randomUUID().toString());
-                user.setUserPassword(MD5Util.md5(user.getUserPassword()));
+                user.setUserPassword(SecureUtil.md5(user.getUserPassword()));
                 userMapper.insert(user);
                 result.put("msg", "用户创建成功");
             }
@@ -86,7 +86,7 @@ public class UserController {
     @PostMapping("/update")
     public Map<String, Object> update(User user) {
         if (user.getUserPassword() != null) {
-            user.setUserPassword(MD5Util.md5(user.getUserPassword()));
+            user.setUserPassword(SecureUtil.md5(user.getUserPassword()));
         }
         /* 不允许修改userName */
         user.setUserName(null);

@@ -1,8 +1,7 @@
 package com.module.demo.controller.login;
 
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.common.util.JWTUtil;
-import com.common.util.MD5Util;
 import com.common.util.RedisUtil;
 import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.User;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import untitled.JWT;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -53,10 +53,10 @@ public class LoginController {
         Map result = new LinkedHashMap();
         if (user == null) {
             result.put("msg", "用户不存在");
-        } else if (!user.getUserPassword().equals(MD5Util.md5(password))) {
+        } else if (!user.getUserPassword().equals(SecureUtil.md5(password))) {
             result.put("msg", "密码错误");
         } else {
-            String token = JWTUtil.sign(name, MD5Util.md5(password));
+            String token = JWT.sign(name, SecureUtil.md5(password), 5L * 60);
             if (redisOpen) {
                 redisUtil.create(user.getUuid(), token);
             } else {
@@ -72,7 +72,7 @@ public class LoginController {
     @GetMapping("/doLogout")
     public Map doLogout() {
         Subject subject = SecurityUtils.getSubject();
-        String name = JWTUtil.getName((String) subject.getPrincipal());
+        String name = JWT.getName((String) subject.getPrincipal());
         User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
 
         Map result = new HashMap();

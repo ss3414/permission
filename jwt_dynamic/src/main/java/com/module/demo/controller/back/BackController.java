@@ -1,6 +1,5 @@
 package com.module.demo.controller.back;
 
-import com.common.util.JWTUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.model.Permission;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import untitled.JWT;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,7 +35,7 @@ public class BackController {
     public Map home() {
         /* 根据用户拥有的权限决定其内容 */
         Subject subject = SecurityUtils.getSubject();
-        String name = JWTUtil.getName((String) subject.getPrincipal());
+        String name = JWT.getName((String) subject.getPrincipal());
         User select = new User();
         select.setUserName(name);
         List<Role> roleList = roleMapper.selectRoleList(select);

@@ -1,7 +1,7 @@
 package com.module.demo.controller;
 
+import cn.hutool.crypto.SecureUtil;
 import com.common.util.JWTUtil;
-import com.common.util.MD5Util;
 import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +30,11 @@ public class LoginController {
         Map result = new HashMap();
         if (user == null) {
             result.put("msg", "用户不存在");
-        } else if (!user.getUserPassword().equals(MD5Util.md5(password))) {
+        } else if (!user.getUserPassword().equals(SecureUtil.md5(password))) {
             result.put("msg", "密码错误");
         } else {
             result.put("msg", "登录成功");
-            result.put("token", JWTUtil.sign(name, MD5Util.md5(password)));
+            result.put("token", JWTUtil.sign(name, SecureUtil.md5(password)));
         }
         return result;
     }
