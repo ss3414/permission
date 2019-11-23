@@ -61,4 +61,20 @@ public class LoginController {
         return result;
     }
 
+    /* 直接登录 */
+    @GetMapping("/logged")
+    public ModelAndView logged(String para1, String para2) {
+        UsernamePasswordToken token = new UsernamePasswordToken("logged", "123456");
+        Subject subject = SecurityUtils.getSubject();
+
+        ModelAndView view = new ModelAndView();
+        try {
+            subject.login(token);
+            view.setViewName("redirect:/back/home");
+        } catch (Exception e) {
+            view.setViewName("redirect:/login/loginFailure");
+        }
+        return view;
+    }
+
 }

@@ -7,13 +7,13 @@ import com.module.demo.model.Role;
 import com.module.demo.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javautil.security.JWT;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import untitled.JWT;
 
 import java.util.LinkedHashMap;
 import java.util.List;

@@ -8,6 +8,7 @@ import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.Permission;
 import com.module.demo.model.Role;
 import com.module.demo.model.User;
+import javautil.security.JWT;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,7 +20,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
-import untitled.JWT;
 
 import java.util.HashSet;
 import java.util.List;

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import javautil.security.JWT;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import untitled.JWT;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -56,7 +56,7 @@ public class LoginController {
         } else if (!user.getUserPassword().equals(SecureUtil.md5(password))) {
             result.put("msg", "密码错误");
         } else {
-            String token = JWT.sign(name, SecureUtil.md5(password), 5L * 60);
+            String token = JWT.sign(name, SecureUtil.md5(password), 5 * 60);
             if (redisOpen) {
                 redisUtil.create(user.getUuid(), token);
             } else {
