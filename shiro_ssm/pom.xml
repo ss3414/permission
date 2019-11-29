@@ -114,7 +114,6 @@
     </dependencies>
 
     <build>
-        <finalName>shiro_ssm</finalName>
         <plugins>
             <!-- mybatis generator （Maven的约定为resources而非resource）-->
             <plugin>

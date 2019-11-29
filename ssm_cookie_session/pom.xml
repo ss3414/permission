@@ -108,7 +108,6 @@
     </dependencies>
 
     <build>
-        <finalName>ssm_cookie_session</finalName>
         <plugins>
             <!-- mybatis generator （Maven的约定为resources而非resource）-->
             <plugin>

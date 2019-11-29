@@ -79,8 +79,4 @@
 
     </dependencies>
 
-    <build>
-        <finalName>shiro_web</finalName>
-    </build>
-
 </project>
