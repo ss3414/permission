@@ -44,6 +44,8 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <mvc:resources mapping="/frames/**" location="/frames/"/>
+
     <!--************************************************************分割线************************************************************-->
 
     <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -41,7 +41,7 @@ CREATE TABLE `shiro_role_permission`  (
 /************************************************************半分割线******************************/
 /* shiro_rbac/shiro_web/ssm_cookie_session数据 */
 
-INSERT INTO `shiro_user` VALUES (1, '5f2fc818-c4a1-11e9-8b6e-94c6910c8b5c', 'user1', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `shiro_user` VALUES (1, '5f2fc818-c4a1-11e9-8b6e-94c6910c8b5c', 'user1', 'e10adc3949ba59abbe56e057f20f883e'); /* 密码123456 */
 INSERT INTO `shiro_user` VALUES (2, '6a53ad1c-c4a1-11e9-a589-94c6910c8b5c', 'user2', 'e10adc3949ba59abbe56e057f20f883e');
 INSERT INTO `shiro_user` VALUES (3, '72311998-c4a1-11e9-a09a-94c6910c8b5c', 'user3', 'e10adc3949ba59abbe56e057f20f883e');
 

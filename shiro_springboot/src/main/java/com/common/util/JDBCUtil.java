@@ -17,7 +17,7 @@ public class JDBCUtil {
             String url = properties.getProperty("spring.datasource.druid.url");
             String username = properties.getProperty("spring.datasource.druid.username");
             String password = properties.getProperty("spring.datasource.druid.password");
-            Class.forName("spring.datasource.druid.driver-class-name");
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace();

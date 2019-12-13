@@ -64,7 +64,7 @@ public class LoginController {
             /*
              * 登录成功
              * ①将User写入Session，将userId写入Cookie
-             * ②Session在用户第一次访问时就自动创建了（根据JSessionId区分不同用户）
+             * ②Session在用户第一次访问时就自动创建了（根据JSESSIONID区分不同用户）
              * ③跳转后台
              * */
             request.getSession().setAttribute("user", user);
