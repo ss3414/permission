@@ -47,7 +47,8 @@ public class MyInterceptor implements HandlerInterceptor {
          * （Servlet返回验证码也会写入）
          * ②两个项目，IP相同端口不同，同名Cookie会互相覆盖
          * （一个项目禁用Cookie，通过URL回写sessionId）
-         * ③两个项目同时维持一个非JSESSIONID Cookie
+         * ③分布式部署不一定需要引入Redis，两个项目同时维持一个非JSESSIONID Cookie即可（需要在同一个域名下，用Nginx反向代理）
+         * （Cookie储存在Redis中，避免项目重启失效）
          * */
         response.setHeader("Set-Cookie", "");
         String method = request.getMethod();
