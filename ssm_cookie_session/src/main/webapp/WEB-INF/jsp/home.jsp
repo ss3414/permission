@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="/frames/jQuery/jquery-2.2.4.min.js"></script>
 </head>
 <body>
 
