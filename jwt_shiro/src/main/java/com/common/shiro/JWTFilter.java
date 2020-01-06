@@ -41,7 +41,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         return token != null;
     }
 
-    /* 调用Realm.doGetAuthenticationInfo()方法登录 */
+    /* 调用Realm.doGetAuthenticationInfo方法登录 */
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
