@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.demo.mapper.RouteMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.module.demo.model.Route">
+        <id column="id" property="id"/>
+        <result column="route_sort" property="routeSort"/>
+        <result column="route_name" property="routeName"/>
+        <result column="route_url" property="routeUrl"/>
+        <result column="route_perm" property="routePerm"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, route_sort, route_name, route_url, route_perm
+    </sql>
+
+</mapper>
