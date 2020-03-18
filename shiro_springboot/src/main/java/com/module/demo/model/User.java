@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("shiro_user")
 @EqualsAndHashCode(callSuper = false)

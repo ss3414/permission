@@ -45,21 +45,17 @@ public class IndexController {
     }
 
     @RequestMapping("/kaptcha2")
-    public void kaptcha2(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            HttpSession session = request.getSession();
-            session.setAttribute("kaptcha2", "kaptcha2"); /* 每次调用验证码接口将验证码写入Session中 */
+    public void kaptcha2(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("kaptcha2", "kaptcha2"); /* 每次调用验证码接口将验证码写入Session中 */
 
-            OutputStream outputStream = response.getOutputStream();
-            BufferedImage bufferedImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-            ImageIO.write(bufferedImage, "JPG", outputStream);
-            outputStream.close();
+        OutputStream outputStream = response.getOutputStream();
+        BufferedImage bufferedImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        ImageIO.write(bufferedImage, "JPG", outputStream);
+        outputStream.close();
 
-            /* Controller返回验证码可以修改response header */
-            response.setHeader("Set-Cookie", "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        /* Controller返回验证码可以修改response header */
+        response.setHeader("Set-Cookie", "");
     }
 
 }
