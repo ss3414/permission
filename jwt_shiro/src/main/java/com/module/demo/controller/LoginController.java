@@ -1,6 +1,7 @@
 package com.module.demo.controller;
 
 import cn.hutool.crypto.SecureUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.common.util.JWTUtil;
 import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.User;
@@ -23,9 +24,7 @@ public class LoginController {
     /* 登录行为 */
     @PostMapping("/doLogin")
     public Map doLogin(String name, String password) {
-        User user = new User();
-        user.setUserName(name);
-        user = userMapper.selectUser(user);
+        User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
 
         Map result = new HashMap();
         if (user == null) {

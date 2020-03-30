@@ -5,13 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,20 +38,6 @@ public class IndexController {
         Map result = new HashMap();
         result.put("sessionId", session.getId() != null ? session.getId() : "sessionId");
         return result;
-    }
-
-    @RequestMapping("/kaptcha2")
-    public void kaptcha2(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("kaptcha2", "kaptcha2"); /* 每次调用验证码接口将验证码写入Session中 */
-
-        OutputStream outputStream = response.getOutputStream();
-        BufferedImage bufferedImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
-        ImageIO.write(bufferedImage, "JPG", outputStream);
-        outputStream.close();
-
-        /* Controller返回验证码可以修改response header */
-        response.setHeader("Set-Cookie", "");
     }
 
 }

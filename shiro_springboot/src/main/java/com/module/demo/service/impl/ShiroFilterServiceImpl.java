@@ -1,5 +1,6 @@
 package com.module.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.module.demo.mapper.FilterMapper;
 import com.module.demo.model.Filter;
 import com.module.demo.service.ShiroFilterService;
@@ -10,7 +11,6 @@ import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class ShiroFilterServiceImpl implements ShiroFilterService {
             shiroFilterFactoryBean.getFilterChainDefinitionMap().clear();
 
             /* 生成新权限 */
-            List<Filter> filterList = filterMapper.selectFilterListBySort();
+            List<Filter> filterList = filterMapper.selectList(new QueryWrapper<Filter>().lambda().orderByAsc(Filter::getFilterSort));
             Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
             for (int i = 0; i < filterList.size(); i++) {
                 filterChainManager.createChain(filterList.get(i).getFilterUrl(), filterList.get(i).getFilterPerm());

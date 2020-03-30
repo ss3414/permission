@@ -1,5 +1,6 @@
 package com.common.shiro;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
 import com.module.demo.mapper.UserMapper;
@@ -42,9 +43,7 @@ public class RBACRealm extends AuthorizingRealm {
         } else {
             String password = new String(token.getPassword());
 
-            User select = new User();
-            select.setUserName(name);
-            User result = userMapper.selectUser(select);
+            User result = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
             /*
              * ①用户不存在/密码错误都会报错
              * ②传入的result与token比对密码

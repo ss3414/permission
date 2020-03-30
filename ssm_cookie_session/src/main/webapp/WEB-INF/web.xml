@@ -53,18 +53,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--
-    访问/kaptcha返回验证码
-    -->
-    <servlet>
-        <servlet-name>KaptchaServlet</servlet-name>
-        <servlet-class>com.servlet.KaptchaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>KaptchaServlet</servlet-name>
-        <url-pattern>/kaptcha1</url-pattern>
-    </servlet-mapping>
-
     <!--************************************************************分割线************************************************************-->
 
     <!-- Session超时时间（单位：分钟） -->

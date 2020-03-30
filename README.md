@@ -6,7 +6,6 @@
 # ssm_cookie_session
 ①SSM（JDK6）+RBAC<br>
 ②归档<br>
-AWT生成验证码<br>
 服务端禁用Cookie<br>
 Cookie+拦截器控制权限<br>
 
