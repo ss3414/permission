@@ -63,7 +63,7 @@
                 console.log(JSON.stringify(data))
                 alert(JSON.stringify(data))
             }
-        });
+        })
     }
 
     function back() {
@@ -78,7 +78,7 @@
                 console.log(JSON.stringify(data))
                 alert(JSON.stringify(data))
             }
-        });
+        })
     }
 
     function user() {
@@ -93,7 +93,7 @@
                 console.log(JSON.stringify(data))
                 alert(JSON.stringify(data))
             }
-        });
+        })
     }
 </script>
 
