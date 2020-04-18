@@ -52,13 +52,13 @@
 <script>
     function login() {
         $.ajax({
+            type: "post",
             url: "/login/doLogin",
             data: {
                 name: $("#name").val(),
                 password: $("#pwd").val(),
             },
             dataType: "json",
-            type: "post",
             success: function (data) {
                 console.log(JSON.stringify(data))
                 alert(JSON.stringify(data))
@@ -68,12 +68,12 @@
 
     function back() {
         $.ajax({
+            type: "post",
             url: "/back/home",
             headers: {
                 token: $("#token1").val(),
             },
             dataType: "json",
-            type: "get",
             success: function (data) {
                 console.log(JSON.stringify(data))
                 alert(JSON.stringify(data))
@@ -83,12 +83,12 @@
 
     function user() {
         $.ajax({
+            type: "post",
             url: "/user/list",
             headers: {
                 token: $("#token2").val(),
             },
             dataType: "json",
-            type: "get",
             success: function (data) {
                 console.log(JSON.stringify(data))
                 alert(JSON.stringify(data))
