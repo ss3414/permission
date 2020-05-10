@@ -1,6 +1,6 @@
 package com.common.shiro;
 
-import javautil.sql.JDBC1;
+import javautil.sql.JDBC;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 public class ShiroConfig {
 
-    private static JDBC1 util;
+    private static JDBC util;
 
     public ShiroConfig() throws IOException {
         InputStream inputStream = ShiroConfig.class.getResourceAsStream("/application.properties");
@@ -30,7 +30,7 @@ public class ShiroConfig {
         String url = properties.getProperty("spring.datasource.druid.url");
         String username = properties.getProperty("spring.datasource.druid.username");
         String password = properties.getProperty("spring.datasource.druid.password");
-        util = new JDBC1(url, username, password);
+        util = new JDBC(url, username, password);
     }
 
     /* MD5加密，加密1次，使用Hex存储 */
