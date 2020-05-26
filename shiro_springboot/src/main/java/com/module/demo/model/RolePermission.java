@@ -4,19 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
-import java.io.Serializable;
+import lombok.NoArgsConstructor;
 
 @Data
-@Accessors(chain = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("shiro_role_permission")
-@EqualsAndHashCode(callSuper = false)
 public class RolePermission extends Model<RolePermission> {
-
-    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -24,10 +22,5 @@ public class RolePermission extends Model<RolePermission> {
     private Integer roleId;
 
     private Integer permissionId;
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 
 }

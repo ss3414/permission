@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 public class ShiroConfig {
 
-    private static JDBC util;
+    private JDBC util;
 
     public ShiroConfig() throws IOException {
         InputStream inputStream = ShiroConfig.class.getResourceAsStream("/application.properties");
@@ -81,7 +81,7 @@ public class ShiroConfig {
         /* 此处注入Mapper/JDBCTemplate均报错，只能使用JDBC */
         List<Map<String, Object>> filterList = util.select("SELECT * FROM shiro_filter order by filter_sort");
         for (int i = 0; i < filterList.size(); i++) {
-            filterChainDefinitionMap.put((String) filterList.get(i).get("filter_url"), (String) filterList.get(i).get("filter_name"));
+            filterChainDefinitionMap.put((String) filterList.get(i).get("filter_url"), (String) filterList.get(i).get("filter_perm"));
         }
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

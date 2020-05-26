@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class JWTFilter extends BasicHttpAuthenticationFilter {
 
-    private static JDBC util;
+    private JDBC util;
 
     public JWTFilter() throws IOException {
         InputStream inputStream = JWTFilter.class.getResourceAsStream("/application.properties");

@@ -52,7 +52,7 @@ public class PermController {
         Map<String, Object> result = new LinkedHashMap<>();
         try {
             permissionMapper.insert(permission);
-            rolePermissionMapper.insert(new RolePermission().setRoleId(1).setPermissionId(permission.getId())); /* 角色1为管理员角色 */
+            rolePermissionMapper.insert(RolePermission.builder().roleId(1).permissionId(permission.getId()).build()); /* 角色1为管理员角色 */
             result.put("msg", "权限创建成功");
         } catch (Exception e) {
             e.printStackTrace();
