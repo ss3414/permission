@@ -8,6 +8,8 @@ import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,10 @@ public class BackController {
         ModelAndView view = new ModelAndView();
         /* 根据用户拥有的权限决定其内容 */
         User select = (User) request.getSession().getAttribute("user");
+
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request2 = attributes.getRequest();
+
         List<Role> roleList = roleMapper.selectRoleList(select);
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         view.addObject("roleList", roleList);
