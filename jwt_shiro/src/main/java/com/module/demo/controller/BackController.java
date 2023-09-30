@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class BackController {
         select.setUserName(name);
         List<Role> roleList = roleMapper.selectRoleList(select);
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "后台首页");
         result.put("roleList", roleList);
         result.put("permissionList", permissionList);

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
@@ -19,8 +19,7 @@ public class ShiroConfig {
     /* 自定义Realm */
     @Bean
     public JWTRealm JWTRealm() {
-        JWTRealm myRealm = new JWTRealm();
-        return myRealm;
+        return new JWTRealm();
     }
 
     /* SecurityManager */
@@ -37,11 +36,11 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager());
         /* 自定义拦截器 */
-        Map<String, Filter> filters = new HashMap<>();
+        Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("jwt", new JWTFilter());
         shiroFilterFactoryBean.setFilters(filters);
         /* 自定义拦截链 */
-        Map<String, String> filterChainDefinitionMap = new HashMap<>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         /* 不需要登录的接口（前台/登录/登录失败/未登录/未授权） */
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/json", "anon");

@@ -75,7 +75,7 @@ public class LoginController {
         String name = JWT.getName((String) subject.getPrincipal());
         User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
 
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         if (user != null) {
             if (redisOpen) {
                 redisUtil.delete(user.getUuid());

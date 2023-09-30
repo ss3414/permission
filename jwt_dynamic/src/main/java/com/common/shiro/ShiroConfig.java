@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
@@ -20,8 +20,7 @@ public class ShiroConfig {
     /* 自定义Realm */
     @Bean
     public JWTRealm JWTRealm() {
-        JWTRealm myRealm = new JWTRealm();
-        return myRealm;
+        return new JWTRealm();
     }
 
     /* SecurityManager */
@@ -38,12 +37,12 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager());
         /* 自定义拦截器 */
-        Map<String, Filter> filters = new HashMap<>();
+        Map<String, Filter> filters = new LinkedHashMap<>();
         /* fixme Spring管理JWTFilter */
         filters.put("jwt", new JWTFilter());
         shiroFilterFactoryBean.setFilters(filters);
         /* 自定义拦截链 */
-        Map<String, String> filterChainDefinitionMap = new HashMap<>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         /* 静态资源 */
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");

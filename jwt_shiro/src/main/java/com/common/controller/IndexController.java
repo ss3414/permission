@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -19,7 +19,7 @@ public class IndexController {
 
     @GetMapping("/json")
     public Map json() {
-        Map map = new HashMap();
+        Map map = new LinkedHashMap();
         map.put("msg", "中文");
         return map;
     }

@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com</groupId>
-    <artifactId>shiro_springboot</artifactId>
+    <artifactId>satoken_springboot</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -39,48 +39,23 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
-        <!-- 数据源 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.38</version>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>1.36.0</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.10</version>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-redisson-jackson</artifactId>
+            <version>1.36.0</version>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-
-        <!-- Shiro -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-
-        <!-- 工具 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.6.8</version>
-        </dependency>
-        <dependency>
-            <groupId>util</groupId>
-            <artifactId>java-util</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.10</version>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-jwt</artifactId>
+            <version>1.36.0</version>
         </dependency>
 
     </dependencies>

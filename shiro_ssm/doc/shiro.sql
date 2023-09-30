@@ -2,40 +2,40 @@
 /* todo 数据库结构 */
 
 CREATE TABLE `shiro_user`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE `shiro_role`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`role_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE `shiro_user_role`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NULL DEFAULT 0,
-  `role_id` int(11) NULL DEFAULT 0,
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`user_id` int(11) NULL DEFAULT 0,
+`role_id` int(11) NULL DEFAULT 0,
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE `shiro_permission`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) NULL DEFAULT 0, /* 0：一级菜单 */
-  `permission_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `permission_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `permission_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`parent_id` int(11) NULL DEFAULT 0, /* 0：一级菜单 */
+`permission_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`permission_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`permission_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE `shiro_role_permission`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_id` int(11) NULL DEFAULT 0,
-  `permission_id` int(11) NULL DEFAULT 0,
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`role_id` int(11) NULL DEFAULT 0,
+`permission_id` int(11) NULL DEFAULT 0,
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 /************************************************************半分割线******************************/
@@ -136,11 +136,11 @@ INSERT INTO `shiro_role_permission` VALUES (25, 2, 1);
 /* shiro_springboot数据 */
 
 CREATE TABLE `shiro_filter`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `filter_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
-  `filter_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `filter_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`filter_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
+`filter_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`filter_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 INSERT INTO `shiro_filter` VALUES (1, 0, '/', 'anon');
@@ -167,12 +167,12 @@ INSERT INTO `shiro_filter` VALUES (19, 2, '/perm/delete', 'perms[permission:dele
 /* jwt_dynamic数据 */
 
 CREATE TABLE `shiro_route`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `route_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
-  `route_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `route_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  `route_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-  PRIMARY KEY (`id`) USING BTREE
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`route_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
+`route_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`route_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+`route_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 INSERT INTO `shiro_route`(`route_sort`, `route_name`, `route_url`, `route_perm`) VALUES (0, '', '/', 'anon');

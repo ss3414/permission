@@ -4,15 +4,15 @@
 ************************************************************************************************************************
 
 # ssm_cookie_session
-①SSM（JDK8）+RBAC<br>
+①SSM+RBAC<br>
 ②归档<br>
 服务端禁用Cookie<br>
 Cookie+拦截器控制权限<br>
 
-************************************************************************************************************************
+******************************************************************************************
 
 # shiro_ssm
-①SSM（JDK8）+Shiro<br>
+①SSM+Shiro<br>
 ②Shiro整合SSM<br>
 数据库结构同shiro_rbac，Realm调用MyBatis<br>
 ③归档<br>
@@ -24,7 +24,7 @@ MD5加密<br>
 除特定路由外，全局要求登录<br>
 
 # shiro_springboot
-①SpringBoot（JDK8）+MBP+Shiro<br>
+①SpringBoot+MBP+Shiro<br>
 ②Shiro整合SpringBoot（shiro_ssm的SpringBoot版）<br>
 MyBatis配置（DataSourceConfig）<br>
 Shiro配置（ShiroConfig）<br>
@@ -46,7 +46,7 @@ Shiro配置（ShiroConfig）<br>
 ⑥带token+需要权限：（调用Shiro登录）token无效/用户不存在/密码错误/token有效（再调用Shiro授权）<br>
 
 # jwt_shiro
-①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
+①SpringBoot+MBP+Shiro+JWT<br>
 ②Shiro整合JWT（固定权限）<br>
 ③Shiro Cookie原理<br>
 登录时调用doGetAuthenticationInfo()登录<br>
@@ -58,6 +58,12 @@ JWTFilter拦截需要登录路由并调用JWTRealm登录<br>
 Shiro注解调用JWTRealm登录/授权<br>
 
 # jwt_dynamic
-①SpringBoot（JDK8）+MBP+Shiro+JWT<br>
+①SpringBoot+MBP+Shiro+JWT<br>
 ②Shiro整合JWT（动态权限）<br>
 ③引入Redis和Spring Cache<br>
+
+******************************************************************************************
+
+# satoken_springboot
+①SpringBoot+Sa-Token+Redisson+JWT<br>
+②RedissonConfig（手动配置）<br>

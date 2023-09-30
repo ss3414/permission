@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -26,7 +26,7 @@ public class LoginController {
     public Map doLogin(String name, String password) {
         User user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUserName, name));
 
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         if (user == null) {
             result.put("msg", "用户不存在");
         } else if (!user.getUserPassword().equals(SecureUtil.md5(password))) {
@@ -40,21 +40,21 @@ public class LoginController {
 
     @GetMapping("/exist")
     public Map exist() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "用户不存在");
         return result;
     }
 
     @GetMapping("/error")
     public Map error() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "密码错误");
         return result;
     }
 
     @GetMapping("/invalid")
     public Map invalid() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "token无效");
         return result;
     }

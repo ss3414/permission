@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -15,7 +15,7 @@ public class UserController {
     @GetMapping("/list")
     @RequiresPermissions("user:list")
     public Map list() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "user:list");
         return result;
     }
@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping("/create")
     @RequiresPermissions("user:create")
     public Map create() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "user:create");
         return result;
     }
@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/get")
     @RequiresPermissions("user:get")
     public Map get() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "user:get");
         return result;
     }
@@ -39,7 +39,7 @@ public class UserController {
     @GetMapping("/update")
     @RequiresPermissions("user:update")
     public Map update() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "user:update");
         return result;
     }
@@ -47,7 +47,7 @@ public class UserController {
     @GetMapping("/delete")
     @RequiresPermissions("user:delete")
     public Map delete() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "user:delete");
         return result;
     }

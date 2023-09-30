@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -48,7 +48,7 @@ public class LoginController {
     /* 登录失败 */
     @GetMapping("/loginFailure")
     public Map loginFailure() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "用户不存在/密码错误");
         return result;
     }
@@ -56,7 +56,7 @@ public class LoginController {
     /* 没有权限 */
     @GetMapping("/noPermission")
     public Map noPermission() {
-        Map result = new HashMap();
+        Map result = new LinkedHashMap();
         result.put("msg", "没有权限");
         return result;
     }
