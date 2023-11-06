@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Api(description = "用户角色关联管理")
+@Api("用户角色关联管理")
 @RestController
 @RequestMapping("/userRole")
 public class UserRoleController {

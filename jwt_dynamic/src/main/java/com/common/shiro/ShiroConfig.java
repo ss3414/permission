@@ -38,7 +38,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager());
         /* 自定义拦截器 */
         Map<String, Filter> filters = new LinkedHashMap<>();
-        /* fixme Spring管理JWTFilter */
+        /* Spring管理JWTFilter */
         filters.put("jwt", new JWTFilter());
         shiroFilterFactoryBean.setFilters(filters);
         /* 自定义拦截链 */

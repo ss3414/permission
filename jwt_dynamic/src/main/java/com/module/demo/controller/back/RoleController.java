@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(description = "角色管理")
+@Api("角色管理")
 @RestController
 @RequestMapping("/role")
 public class RoleController {

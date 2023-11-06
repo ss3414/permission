@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Api(description = "角色权限关联管理")
+@Api("角色权限关联管理")
 @RestController
 @RequestMapping("/rolePerm")
 public class RolePermController {

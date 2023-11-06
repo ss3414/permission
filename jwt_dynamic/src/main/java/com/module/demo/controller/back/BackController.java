@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(description = "后台")
+@Api("后台")
 @RestController
 @RequestMapping("/back")
 public class BackController {

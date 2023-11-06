@@ -34,9 +34,9 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * ①先查路由表，不需要登录/需要登录/需要权限
      * ②再查用户权限
      *
-     * fixme 路由匹配
-     *  ①完全匹配+所有路由
-     *  ②通配符
+     * 路由匹配
+     * ①完全匹配+所有路由
+     * ②通配符
      * */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {

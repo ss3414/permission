@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Api(description = "登录")
+@Api("登录")
 @RestController
 @RequestMapping("/login")
 public class LoginController {

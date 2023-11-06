@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Api(description = "用户管理")
+@Api("用户管理")
 @RestController
 @RequestMapping("/user")
 public class UserController {

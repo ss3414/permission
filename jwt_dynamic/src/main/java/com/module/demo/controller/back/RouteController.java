@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Api(description = "路由管理")
+@Api("路由管理")
 @RestController
 @RequestMapping("/route")
 public class RouteController {

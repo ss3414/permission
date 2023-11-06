@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(description = "权限管理")
+@Api("权限管理")
 @RestController
 @RequestMapping("/perm")
 public class PermController {
