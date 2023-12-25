@@ -48,11 +48,11 @@ public class RoleController {
         Page<Role> rolePage = new Page<>();
         rolePage.setCurrent(currentPage);
         rolePage.setSize(pageSize);
-        IPage<Role> roleList = new Page<>();
+        IPage<Role> roleList;
         if (roleName != null && !roleName.isEmpty()) {
             roleList = roleMapper.selectPage(rolePage, new QueryWrapper<Role>().lambda().eq(Role::getRoleName, roleName));
         } else {
-            roleList = roleMapper.selectPage(rolePage, new QueryWrapper<Role>());
+            roleList = roleMapper.selectPage(rolePage, new QueryWrapper<>());
         }
 
         Map<String, Object> result = new LinkedHashMap<>();

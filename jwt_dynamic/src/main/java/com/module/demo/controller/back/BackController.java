@@ -36,7 +36,7 @@ public class BackController {
         /* 根据用户拥有的权限决定其内容 */
         Subject subject = SecurityUtils.getSubject();
         String name = JWT.getName((String) subject.getPrincipal());
-        User select = new User();
+        User select = User.builder().build();
         select.setUserName(name);
         List<Role> roleList = roleMapper.selectRoleList(select);
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);

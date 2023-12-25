@@ -68,7 +68,7 @@ public class JWTRealm extends AuthorizingRealm {
             } else if (!JWT.verify(token, name, user.getUserPassword())) {
                 throw new AuthenticationException("密码错误");
             } else {
-                String cacheToken = "";
+                String cacheToken;
                 if (redisOpen) {
                     cacheToken = redisUtil.read(user.getUuid());
                 } else {

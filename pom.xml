@@ -3,11 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modules>
+        <module>cas_springboot</module>
+        <module>cookie_jwt</module>
         <module>jwt_dynamic</module>
         <module>jwt_shiro</module>
         <module>satoken_springboot</module>
+        <module>shiro_redis</module>
         <module>shiro_springboot</module>
-        <module>shiro_ssm</module>
         <module>ssm_cookie_session</module>
     </modules>
 

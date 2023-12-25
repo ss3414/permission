@@ -32,11 +32,11 @@ public class PermController {
         Page<Permission> permissionPage = new Page<>();
         permissionPage.setCurrent(currentPage);
         permissionPage.setSize(pageSize);
-        IPage<Permission> permissionList = new Page<>();
+        IPage<Permission> permissionList;
         if (permissionName != null && !permissionName.isEmpty()) {
             permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<Permission>().lambda().eq(Permission::getPermissionName, permissionName));
         } else {
-            permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<Permission>());
+            permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<>());
         }
 
         Map<String, Object> result = new LinkedHashMap<>();

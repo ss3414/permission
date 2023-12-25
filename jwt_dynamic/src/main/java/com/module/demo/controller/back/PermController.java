@@ -7,6 +7,7 @@ import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RolePermissionMapper;
 import com.module.demo.model.Permission;
 import com.module.demo.model.RolePermission;
+import com.module.demo.model.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -43,11 +44,11 @@ public class PermController {
         Page<Permission> permissionPage = new Page<>();
         permissionPage.setCurrent(currentPage);
         permissionPage.setSize(pageSize);
-        IPage<Permission> permissionList = new Page<>();
+        IPage<Permission> permissionList;
         if (permissionName != null && !permissionName.isEmpty()) {
             permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<Permission>().lambda().eq(Permission::getPermissionName, permissionName));
         } else {
-            permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<Permission>());
+            permissionList = permissionMapper.selectPage(permissionPage, new QueryWrapper<>());
         }
 
         Map<String, Object> result = new LinkedHashMap<>();
@@ -71,7 +72,7 @@ public class PermController {
         Map<String, Object> result = new LinkedHashMap<>();
         try {
             permissionMapper.insert(permission);
-            rolePermissionMapper.insert(new RolePermission().setRoleId(1).setPermissionId(permission.getId())); /* 角色1为管理员角色 */
+            rolePermissionMapper.insert(RolePermission.builder().roleId(1).permissionId(permission.getId()).build()); /* 角色1为管理员角色 */
             result.put("msg", "权限创建成功");
         } catch (Exception e) {
             e.printStackTrace();

@@ -35,7 +35,7 @@ public class MyInterceptor implements HandlerInterceptor {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-//                    System.out.println(cookie.getName() + ":" + cookie.getValue());
+                    System.out.println(cookie.getName() + ":" + cookie.getValue());
                 }
             }
         }
@@ -125,7 +125,7 @@ public class MyInterceptor implements HandlerInterceptor {
      * 第三个参数o为（下一个拦截器/Controller），modelAndView为上一个处理后的结果
      * */
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) {
 
     }
 
@@ -133,7 +133,7 @@ public class MyInterceptor implements HandlerInterceptor {
      * 在DispatcherServlet完全处理完，即视图渲染完后调用
      * */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
 
     }
 

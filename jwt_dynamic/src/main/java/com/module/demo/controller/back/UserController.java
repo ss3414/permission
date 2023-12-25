@@ -44,11 +44,11 @@ public class UserController {
         Page<User> userPage = new Page<>();
         userPage.setCurrent(currentPage);
         userPage.setSize(pageSize);
-        IPage<User> userList = new Page<>();
+        IPage<User> userList;
         if (userName != null && !userName.isEmpty()) {
             userList = userMapper.selectPage(userPage, new QueryWrapper<User>().lambda().eq(User::getUserName, userName));
         } else {
-            userList = userMapper.selectPage(userPage, new QueryWrapper<User>());
+            userList = userMapper.selectPage(userPage, new QueryWrapper<>());
         }
 
         Map<String, Object> result = new LinkedHashMap<>();

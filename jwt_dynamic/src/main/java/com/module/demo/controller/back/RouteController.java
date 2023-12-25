@@ -37,11 +37,11 @@ public class RouteController {
         Page<Route> routePage = new Page<>();
         routePage.setCurrent(currentPage);
         routePage.setSize(pageSize);
-        IPage<Route> routeList = new Page<>();
+        IPage<Route> routeList;
         if (routeName != null && !routeName.isEmpty()) {
             routeList = routeMapper.selectPage(routePage, new QueryWrapper<Route>().lambda().eq(Route::getRouteName, routeName));
         } else {
-            routeList = routeMapper.selectPage(routePage, new QueryWrapper<Route>());
+            routeList = routeMapper.selectPage(routePage, new QueryWrapper<>());
         }
 
         Map<String, Object> result = new LinkedHashMap<>();
