@@ -2,6 +2,7 @@ package com.module.demo.controller.login;
 
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.common.util.JWT;
 import com.common.util.RedisUtil;
 import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.User;
@@ -9,7 +10,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import javautil.security.JWT;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;

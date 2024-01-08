@@ -33,7 +33,7 @@ public class ShiroConfig {
 
     /* ShiroFilter */
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean() throws IOException {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean() {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager());
         /* 自定义拦截器 */

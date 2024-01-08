@@ -96,7 +96,7 @@ public class PermController {
                 .eq(RolePermission::getPermissionId, id)
                 .ne(RolePermission::getRoleId, 1) /* 不包括默认管理员角色 */
         );
-        if (rolePermissionList.size() > 0) {
+        if (!rolePermissionList.isEmpty()) {
             result.put("msg", "权限删除失败，正在使用的权限无法删除");
         } else {
             try {

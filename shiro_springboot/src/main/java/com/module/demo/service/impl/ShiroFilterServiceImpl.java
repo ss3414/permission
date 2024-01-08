@@ -38,9 +38,9 @@ public class ShiroFilterServiceImpl implements ShiroFilterService {
             /* 生成新权限 */
             List<Filter> filterList = filterMapper.selectList(new QueryWrapper<Filter>().lambda().orderByAsc(Filter::getFilterSort));
             Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-            for (int i = 0; i < filterList.size(); i++) {
-                filterChainManager.createChain(filterList.get(i).getFilterUrl(), filterList.get(i).getFilterPerm());
-                filterChainDefinitionMap.put(filterList.get(i).getFilterUrl(), filterList.get(i).getFilterPerm());
+            for (Filter filter : filterList) {
+                filterChainManager.createChain(filter.getFilterUrl(), filter.getFilterPerm());
+                filterChainDefinitionMap.put(filter.getFilterUrl(), filter.getFilterPerm());
             }
             shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         } catch (Exception e) {

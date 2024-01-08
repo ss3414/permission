@@ -1,6 +1,5 @@
 package com.common.shiro;
 
-import javautil.sql.JDBC;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -11,27 +10,11 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 @Configuration
 public class ShiroConfig {
-
-    private JDBC util;
-
-    public ShiroConfig() throws IOException {
-        InputStream inputStream = ShiroConfig.class.getResourceAsStream("/application.properties");
-        Properties properties = new Properties();
-        properties.load(inputStream);
-        String url = properties.getProperty("spring.datasource.druid.url");
-        String username = properties.getProperty("spring.datasource.druid.username");
-        String password = properties.getProperty("spring.datasource.druid.password");
-        util = new JDBC(url, username, password);
-    }
 
     /* MD5加密，加密1次，使用Hex存储 */
     @Bean
@@ -73,17 +56,10 @@ public class ShiroConfig {
          * ②角色当作权限的集合，拦截链中禁止使用角色，也禁止使用/**通配符（authc除外）
          * */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/", "anon");
-//        filterChainDefinitionMap.put("/login/**", "anon");
-//        filterChainDefinitionMap.put("/doLogout", "logout");
-//        filterChainDefinitionMap.put("/**", "authc");
-
-        /* 此处注入Mapper/JDBCTemplate均报错，只能使用JDBC */
-        List<Map<String, Object>> filterList = util.select("SELECT * FROM shiro_filter order by filter_sort");
-        for (int i = 0; i < filterList.size(); i++) {
-            filterChainDefinitionMap.put((String) filterList.get(i).get("filter_url"), (String) filterList.get(i).get("filter_perm"));
-        }
-
+        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/login/**", "anon");
+        filterChainDefinitionMap.put("/doLogout", "logout");
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

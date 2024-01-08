@@ -1,6 +1,7 @@
 package com.common.shiro;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.common.util.JWT;
 import com.common.util.RedisUtil;
 import com.module.demo.mapper.PermissionMapper;
 import com.module.demo.mapper.RoleMapper;
@@ -8,7 +9,6 @@ import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.Permission;
 import com.module.demo.model.Role;
 import com.module.demo.model.User;
-import javautil.security.JWT;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -98,17 +98,17 @@ public class JWTRealm extends AuthorizingRealm {
             }
         }
 
-        User select = new User();
+        User select = User.builder().build();
         select.setUserName(name);
         List<Role> roleList = roleMapper.selectRoleList(select);
         Set<String> stringRoles = new HashSet<>();
-        for (int i = 0; i < roleList.size(); i++) {
-            stringRoles.add(roleList.get(i).getRoleName());
+        for (Role role : roleList) {
+            stringRoles.add(role.getRoleName());
         }
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         Set<String> stringPermissions = new HashSet<>();
-        for (int i = 0; i < permissionList.size(); i++) {
-            stringPermissions.add(permissionList.get(i).getPermissionPerm());
+        for (Permission permission : permissionList) {
+            stringPermissions.add(permission.getPermissionPerm());
         }
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

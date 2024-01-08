@@ -28,8 +28,8 @@ public class LoginController {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
             Cookie[] cookies = request.getCookies();
-            for (int i = 0; i < cookies.length; i++) {
-                if ("userId".equals(cookies[i].getName()) && user.getId().toString().equals(cookies[i].getValue())) {
+            for (Cookie cookie : cookies) {
+                if ("userId".equals(cookie.getName()) && user.getId().toString().equals(cookie.getValue())) {
                     return new ModelAndView("redirect:/back/home");
                 } else {
                     return new ModelAndView("/login/login");

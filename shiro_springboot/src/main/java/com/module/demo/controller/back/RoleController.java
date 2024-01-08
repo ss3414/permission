@@ -97,7 +97,7 @@ public class RoleController {
     public Map<String, Object> delete(Integer id) {
         Map<String, Object> result = new LinkedHashMap<>();
         List<UserRole> userRoleList = userRoleMapper.selectList(new QueryWrapper<UserRole>().lambda().eq(UserRole::getRoleId, id));
-        if (userRoleList.size() > 0) {
+        if (!userRoleList.isEmpty()) {
             result.put("msg", "角色删除失败，正在使用的角色无法删除");
         } else {
             try {

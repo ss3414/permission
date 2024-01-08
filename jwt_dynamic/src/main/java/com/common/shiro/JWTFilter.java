@@ -1,34 +1,19 @@
 package com.common.shiro;
 
-import javautil.sql.JDBC;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JWTFilter extends BasicHttpAuthenticationFilter {
-
-    private JDBC util;
-
-    public JWTFilter() throws IOException {
-        InputStream inputStream = JWTFilter.class.getResourceAsStream("/application.properties");
-        Properties properties = new Properties();
-        properties.load(inputStream);
-        String url = properties.getProperty("spring.datasource.druid.url");
-        String username = properties.getProperty("spring.datasource.druid.username");
-        String password = properties.getProperty("spring.datasource.druid.password");
-        util = new JDBC(url, username, password);
-    }
 
     /*
      * ①先查路由表，不需要登录/需要登录/需要权限
@@ -43,7 +28,8 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String URI = httpServletRequest.getRequestURI();
 
-        List<Map<String, Object>> routeList = util.select("SELECT * FROM shiro_route order by route_sort");
+//        List<Map<String, Object>> routeList = util.select("SELECT * FROM shiro_route order by route_sort");
+        List<Map<String, Object>> routeList = new ArrayList<>();
         for (Map<String, Object> route : routeList) {
             if (route.get("route_url").equals(URI)) {
                 if (route.get("route_perm").equals("anon")) { /* 不需要登录 */
@@ -94,7 +80,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             httpServletResponse.setCharacterEncoding("UTF-8");
             PrintWriter writer = httpServletResponse.getWriter();
             writer.print("{\"msg\":\"" + msg + "\"}");
-            return false;
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

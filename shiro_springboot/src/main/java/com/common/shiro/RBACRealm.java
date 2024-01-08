@@ -59,14 +59,14 @@ public class RBACRealm extends AuthorizingRealm {
 
         List<Role> roleList = roleMapper.selectRoleList(select);
         Set<String> stringRoles = new HashSet<>();
-        for (int i = 0; i < roleList.size(); i++) {
-            stringRoles.add(roleList.get(i).getRoleName());
+        for (Role role : roleList) {
+            stringRoles.add(role.getRoleName());
         }
 
         List<Permission> permissionList = permissionMapper.selectPermissionList(select);
         Set<String> stringPermissions = new HashSet<>();
-        for (int i = 0; i < permissionList.size(); i++) {
-            stringPermissions.add(permissionList.get(i).getPermissionPerm());
+        for (Permission permission : permissionList) {
+            stringPermissions.add(permission.getPermissionPerm());
         }
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
