@@ -9,16 +9,6 @@
 服务端禁用Cookie<br>
 Cookie+拦截器控制权限<br>
 
-# shiro_springboot
-①SpringBoot+MBP+Shiro<br>
-②Shiro整合SpringBoot（shiro_ssm的SpringBoot版）<br>
-MyBatis配置（DataSourceConfig）<br>
-Shiro配置（ShiroConfig）<br>
-③动态权限<br>
-动态过滤链实现动态权限<br>
-每次新增权限自动附加到管理员角色上并即时生效<br>
-④拦截器获取参数直接登录<br>
-
 # satoken_springboot
 ①SpringBoot+Sa-Token+Redisson+JWT<br>
 ②RedissonConfig（手动配置）<br>

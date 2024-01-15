@@ -9,7 +9,6 @@
         <module>jwt_shiro</module>
         <module>satoken_springboot</module>
         <module>shiro_redis</module>
-        <module>shiro_springboot</module>
         <module>ssm_cookie_session</module>
     </modules>
 

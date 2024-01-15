@@ -67,7 +67,7 @@ INSERT INTO `shiro_role_permission` VALUES (5, 1, 5);
 INSERT INTO `shiro_role_permission` VALUES (6, 2, 1);
 
 /************************************************************半分割线******************************/
-/* shiro_ssm/shiro_springboot/jwt_shiro/jwt_dynamic数据 */
+/* jwt_shiro/jwt_dynamic数据 */
 
 INSERT INTO `shiro_user` VALUES (1, '5f2fc818-c4a1-11e9-8b6e-94c6910c8b5c', 'user1', 'e10adc3949ba59abbe56e057f20f883e'); /* 密码123456 */
 INSERT INTO `shiro_user` VALUES (2, '6a53ad1c-c4a1-11e9-a589-94c6910c8b5c', 'user2', 'e10adc3949ba59abbe56e057f20f883e');
@@ -131,37 +131,6 @@ INSERT INTO `shiro_role_permission` VALUES (23, 1, 23);
 INSERT INTO `shiro_role_permission` VALUES (24, 1, 24);
 /* user拥有部分权限 */
 INSERT INTO `shiro_role_permission` VALUES (25, 2, 1);
-
-/************************************************************半分割线******************************/
-/* shiro_springboot数据 */
-
-CREATE TABLE `shiro_filter`  (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`filter_sort` int(11) NULL DEFAULT 0, /* 值越大，排序越靠后 */
-`filter_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-`filter_perm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
-PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
-INSERT INTO `shiro_filter` VALUES (1, 0, '/', 'anon');
-INSERT INTO `shiro_filter` VALUES (2, 0, '/login/**', 'anon');
-INSERT INTO `shiro_filter` VALUES (3, 0, '/doLogout', 'logout');
-INSERT INTO `shiro_filter` VALUES (4, 1, '/**', 'authc');
-INSERT INTO `shiro_filter` VALUES (5, 2, '/user/list', 'perms[user:list]');
-INSERT INTO `shiro_filter` VALUES (6, 2, '/user/create', 'perms[user:create]');
-INSERT INTO `shiro_filter` VALUES (7, 2, '/user/get', 'perms[user:get]');
-INSERT INTO `shiro_filter` VALUES (8, 2, '/user/update', 'perms[user:update]');
-INSERT INTO `shiro_filter` VALUES (9, 2, '/user/delete', 'perms[user:delete]');
-INSERT INTO `shiro_filter` VALUES (10, 2, '/role/list', 'perms[role:list]');
-INSERT INTO `shiro_filter` VALUES (11, 2, '/role/create', 'perms[role:create]');
-INSERT INTO `shiro_filter` VALUES (12, 2, '/role/get', 'perms[role:get]');
-INSERT INTO `shiro_filter` VALUES (13, 2, '/role/update', 'perms[role:update]');
-INSERT INTO `shiro_filter` VALUES (14, 2, '/role/delete', 'perms[role:delete]');
-INSERT INTO `shiro_filter` VALUES (15, 2, '/perm/list', 'perms[permission:list]');
-INSERT INTO `shiro_filter` VALUES (16, 2, '/perm/create', 'perms[permission:create]');
-INSERT INTO `shiro_filter` VALUES (17, 2, '/perm/get', 'perms[permission:get]');
-INSERT INTO `shiro_filter` VALUES (18, 2, '/perm/update', 'perms[permission:update]');
-INSERT INTO `shiro_filter` VALUES (19, 2, '/perm/delete', 'perms[permission:delete]');
 
 /************************************************************半分割线******************************/
 /* jwt_dynamic数据 */
