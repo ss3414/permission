@@ -13,7 +13,7 @@
     <groupId>com</groupId>
     <artifactId>shiro_redis</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging><!-- Maven多Module项目的父pom.xml packaging为pom -->
+    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
