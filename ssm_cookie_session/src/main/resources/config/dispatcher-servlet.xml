@@ -40,7 +40,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.interceptor.MyInterceptor"/>
+            <bean class="com.interceptor.DemoInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

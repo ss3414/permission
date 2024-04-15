@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class MyInterceptor implements HandlerInterceptor {
+public class DemoInterceptor implements HandlerInterceptor {
 
     @Autowired
     private PermissionMapper permissionMapper;
